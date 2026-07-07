@@ -1,0 +1,811 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>UP Rewards — Sicredi Up Academy</title>
+  <meta name="description" content="Transforme seus investimentos em conquistas. Acumule UP e troque por recompensas gamer, criptomoedas, cashback e muito mais.">
+  <meta name="keywords" content="UP Rewards, Sicredi, pontos, recompensas, gamer, cashback, criptomoedas">
+  <meta name="author" content="Sicredi Up Academy">
+  <meta property="og:title" content="UP Rewards — Sicredi Up Academy">
+  <meta property="og:description" content="Acumule UP em cada movimentação e troque por recompensas exclusivas.">
+  <meta property="og:type" content="website">
+  <meta property="og:locale" content="pt_BR">
+  <link rel="icon" type="image/png" href="logo1.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- Partículas globais -->
+  <canvas id="globalParticles" class="global-particles" aria-hidden="true"></canvas>
+
+  <!-- ============================================================
+       NAVBAR — Idêntica à Landing Page, com UP Rewards ativo
+       ============================================================ -->
+  <nav id="navbar" class="navbar scrolled" role="navigation" aria-label="Navegação principal">
+    <div class="nav-container">
+      <a href="index.html" class="nav-logo" aria-label="Sicredi Up Academy - Home">
+        <img src="logo1.png" alt="Up Academy Logo" class="nav-logo-img" width="140" height="48">
+      </a>
+      <ul class="nav-links" id="navLinks" role="menubar">
+        <li role="none"><a href="index.html" class="nav-link" role="menuitem">Home</a></li>
+        <li role="none"><a href="index.html#campeonatos" class="nav-link" role="menuitem">Campeonatos</a></li>
+        <li role="none"><a href="index.html#como-participar" class="nav-link" role="menuitem">Como Participar</a></li>
+        <li role="none"><a href="up-rewards.html" class="nav-link active nav-link--rewards" role="menuitem">UP Rewards</a></li>
+        <li role="none"><a href="index.html#faq" class="nav-link" role="menuitem">FAQ</a></li>
+        <li role="none"><a href="index.html#inscricao" class="nav-cta" role="menuitem">Inscreva-se</a></li>
+      </ul>
+      <button class="nav-hamburger" id="hamburger" aria-label="Abrir menu" aria-expanded="false" aria-controls="navLinks">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </nav>
+
+  <!-- ============================================================
+       HERO — UP Rewards
+       ============================================================ -->
+  <section id="rw-hero" class="rw-hero" aria-label="UP Rewards">
+    <canvas id="rwHeroCanvas" class="rw-hero-canvas" aria-hidden="true"></canvas>
+    <div class="rw-hero-glow rw-hero-glow--1" aria-hidden="true"></div>
+    <div class="rw-hero-glow rw-hero-glow--2" aria-hidden="true"></div>
+    <div class="rw-hero-grid" aria-hidden="true"></div>
+
+    <div class="hero-container">
+      <div class="hero-content">
+        <div class="hero-badge animate-on-scroll">
+          <span class="badge-dot"></span>
+          Programa de Recompensas
+        </div>
+        <h1 class="hero-title animate-on-scroll">
+          <span class="title-sicredi">Sicredi</span>
+          <span class="title-up">UP</span>
+          <span class="rw-hero-badge-label">Rewards</span>
+        </h1>
+        <p class="hero-subtitle animate-on-scroll">Transforme seus investimentos em conquistas dentro e fora dos jogos.</p>
+        <p class="hero-text animate-on-scroll">Utilize produtos financeiros, invista, compre com seu cartão e transforme cada movimentação em recompensas exclusivas.</p>
+        <div class="hero-buttons animate-on-scroll">
+          <a href="#rw-como-ganhar" class="btn btn-primary btn-lg">
+            <span>Ganhar UP</span>
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+          </a>
+          <a href="#rw-recompensas" class="btn btn-secondary btn-lg">Ver Recompensas</a>
+        </div>
+        <!-- Moedas flutuantes decorativas -->
+        <div class="rw-hero-coins" aria-hidden="true">
+          <span class="rw-coin rw-coin--1">UP</span>
+          <span class="rw-coin rw-coin--2">UP</span>
+          <span class="rw-coin rw-coin--3">UP</span>
+        </div>
+      </div>
+      <div class="hero-image animate-on-scroll">
+        <div class="hero-image-wrapper">
+          <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=600&h=750&fit=crop&crop=center" alt="Conceito de recompensas digitais e gamificação financeira" width="600" height="750" loading="eager">
+          <div class="hero-image-overlay" aria-hidden="true"></div>
+          <div class="hero-image-border" aria-hidden="true"></div>
+          <div class="hero-image-tag">
+            <span class="tag-icon">💎</span>
+            <span>Moeda UP</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="hero-scroll-indicator" aria-hidden="true">
+      <span>Scroll</span>
+      <div class="scroll-line"></div>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       COMO GANHAR UP — 4 cards
+       ============================================================ -->
+  <section id="rw-como-ganhar" class="section section-sobre" aria-labelledby="rw-ganhar-title">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-tag animate-on-scroll">Como Ganhar UP</span>
+        <h2 id="rw-ganhar-title" class="section-title animate-on-scroll">
+          Todas as formas de <span class="text-green">acumular pontos</span>
+        </h2>
+        <p class="section-description animate-on-scroll">Cada interação com a cooperativa gera UP. Quanto mais você usa, mais conquista.</p>
+      </div>
+
+      <div class="rw-ganhar-grid">
+        <!-- Cartão de Crédito -->
+        <div class="rw-ganhar-card animate-on-scroll">
+          <div class="rw-ganhar-icon">
+            <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect width="22" height="16" x="1" y="4" rx="2"/><line x1="1" x2="23" y1="10" y2="10"/></svg>
+          </div>
+          <h3 class="rw-ganhar-title">Cartão de Crédito</h3>
+          <p class="rw-ganhar-desc">Cada compra realizada com seu cartão Sicredi gera pontos UP. Nacionais ou internacionais, online ou presencial.</p>
+          <div class="rw-ganhar-stat">
+            <span class="rw-ganhar-stat-num">1.5 UP</span>
+            <span class="rw-ganhar-stat-label">por R$ 1 gasto</span>
+          </div>
+        </div>
+
+        <!-- Investimentos -->
+        <div class="rw-ganhar-card animate-on-scroll">
+          <div class="rw-ganhar-icon">
+            <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 7 13.5 15.5 8.5 10.5 2 17"/><polyline points="16 7 22 7 22 13"/></svg>
+          </div>
+          <h3 class="rw-ganhar-title">Investimentos</h3>
+          <p class="rw-ganhar-desc">Tesouro Direto, CDB, LCI, LCA, Fundos e Renda Variável. Quanto mais você investe, mais UP acumula.</p>
+          <div class="rw-ganhar-tags">
+            <span class="rw-ganhar-tag">CDB</span>
+            <span class="rw-ganhar-tag">Tesouro</span>
+            <span class="rw-ganhar-tag">Fundos</span>
+            <span class="rw-ganhar-tag">RV</span>
+          </div>
+        </div>
+
+        <!-- Produtos Financeiros -->
+        <div class="rw-ganhar-card animate-on-scroll">
+          <div class="rw-ganhar-icon">
+            <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3 21h18"/><path d="M5 21V7l8-4v18"/><path d="M19 21V11l-6-4"/><path d="M9 9v.01"/><path d="M9 12v.01"/><path d="M9 15v.01"/><path d="M9 18v.01"/></svg>
+          </div>
+          <h3 class="rw-ganhar-title">Produtos Financeiros</h3>
+          <p class="rw-ganhar-desc">Consórcio, Seguro, Previdência, Financiamento, Crédito e Conta Digital. Toda contratação gera UP.</p>
+          <div class="rw-ganhar-tags">
+            <span class="rw-ganhar-tag">Consórcio</span>
+            <span class="rw-ganhar-tag">Seguro</span>
+            <span class="rw-ganhar-tag">Previdência</span>
+          </div>
+        </div>
+
+        <!-- App Sicredi -->
+        <div class="rw-ganhar-card animate-on-scroll">
+          <div class="rw-ganhar-icon">
+            <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect width="14" height="20" x="5" y="2" rx="2" ry="2"/><path d="M12 18h.01"/></svg>
+          </div>
+          <h3 class="rw-ganhar-title">App Sicredi</h3>
+          <p class="rw-ganhar-desc">Pagamentos, PIX, Débito Automático, Aplicações e Transferências realizadas pelo app geram UP automaticamente.</p>
+          <div class="rw-ganhar-stat">
+            <span class="rw-ganhar-stat-num">+10 UP</span>
+            <span class="rw-ganhar-stat-label">por transação</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       SIMULADOR DE GANHOS
+       ============================================================ -->
+  <section id="rw-simulador" class="section section-campeonatos" aria-labelledby="rw-sim-title">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-tag animate-on-scroll">Simulador</span>
+        <h2 id="rw-sim-title" class="section-title animate-on-scroll">
+          Simule seus <span class="text-green">ganhos de UP</span>
+        </h2>
+        <p class="section-description animate-on-scroll">Descubra quantos UP você pode acumular com seus gastos e investimentos.</p>
+      </div>
+
+      <div class="rw-sim-wrapper animate-on-scroll">
+        <div class="rw-sim-grid">
+          <div class="rw-sim-form">
+            <div class="rw-sim-group">
+              <label for="sim-cartao" class="form-label">Valor gasto no cartão/mês (R$)</label>
+              <input type="number" id="sim-cartao" class="form-input" placeholder="Ex: 1500" min="0" step="100">
+            </div>
+            <div class="rw-sim-group">
+              <label for="sim-investimento" class="form-label">Valor investido (R$)</label>
+              <input type="number" id="sim-investimento" class="form-input" placeholder="Ex: 5000" min="0" step="100">
+            </div>
+            <div class="rw-sim-group">
+              <label for="sim-tipo" class="form-label">Tipo do investimento</label>
+              <select id="sim-tipo" class="form-input form-select">
+                <option value="tesouro">Tesouro Direto</option>
+                <option value="cdb">CDB</option>
+                <option value="lci">LCI / LCA</option>
+                <option value="fundos">Fundos de Investimento</option>
+                <option value="rv">Renda Variável</option>
+              </select>
+            </div>
+            <div class="rw-sim-group">
+              <label for="sim-prazo" class="form-label">Prazo (meses)</label>
+              <select id="sim-prazo" class="form-input form-select">
+                <option value="1">1 mês</option>
+                <option value="3">3 meses</option>
+                <option value="6" selected>6 meses</option>
+                <option value="12">12 meses</option>
+                <option value="24">24 meses</option>
+              </select>
+            </div>
+            <button id="sim-calcular" class="btn btn-primary btn-submit" type="button">
+              <span class="btn-submit-text">Calcular</span>
+              <svg class="btn-submit-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+            </button>
+          </div>
+
+          <div class="rw-sim-result" id="sim-result">
+            <div class="rw-sim-result-inner">
+              <span class="rw-sim-result-label">Você ganharia</span>
+              <div class="rw-sim-result-value">
+                <span class="rw-sim-result-number" id="sim-up-count">0</span>
+                <span class="rw-sim-result-unit">UP</span>
+              </div>
+              <div class="rw-sim-result-bar">
+                <div class="rw-sim-result-bar-fill" id="sim-bar-fill"></div>
+                <span class="rw-sim-result-bar-label" id="sim-bar-label">0%</span>
+              </div>
+              <p class="rw-sim-result-equiv" id="sim-equiv">Equivalente a aproximadamente R$ 0 em recompensas</p>
+              <!-- Moedas animadas -->
+              <div class="rw-sim-coins" id="sim-coins" aria-hidden="true"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       O QUE POSSO RESGATAR — Vitrine de recompensas
+       ============================================================ -->
+  <section id="rw-recompensas" class="section section-beneficios" aria-labelledby="rw-rec-title">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-tag animate-on-scroll">Recompensas</span>
+        <h2 id="rw-rec-title" class="section-title animate-on-scroll">
+          O que posso <span class="text-green">resgatar?</span>
+        </h2>
+        <p class="section-description animate-on-scroll">Games, criptomoedas, cashback, descontos, equipamentos e muito mais.</p>
+      </div>
+
+      <!-- Filtro por categoria -->
+      <div class="rw-filter-bar animate-on-scroll">
+        <button class="rw-filter-btn active" data-filter="all">Todos</button>
+        <button class="rw-filter-btn" data-filter="games">Games</button>
+        <button class="rw-filter-btn" data-filter="crypto">Cripto</button>
+        <button class="rw-filter-btn" data-filter="cashback">Cashback</button>
+        <button class="rw-filter-btn" data-filter="equipamentos">Equipamentos</button>
+        <button class="rw-filter-btn" data-filter="eventos">Eventos</button>
+      </div>
+
+      <div class="rw-recompensas-grid" id="rw-recompensas-grid">
+        <!-- Os cards são gerados via JavaScript para manter o HTML limpo -->
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       SISTEMA DE NÍVEIS
+       ============================================================ -->
+  <section id="rw-niveis" class="section section-como-participar" aria-labelledby="rw-niveis-title">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-tag animate-on-scroll">Níveis</span>
+        <h2 id="rw-niveis-title" class="section-title animate-on-scroll">
+          Quanto mais UP, <span class="text-green">maior seu nível</span>
+        </h2>
+        <p class="section-description animate-on-scroll">Escale no programa e desbloqueie benefícios exclusivos em cada nível.</p>
+      </div>
+
+      <!-- Nível atual do usuário -->
+      <div class="rw-level-current animate-on-scroll">
+        <div class="rw-level-header">
+          <div class="rw-level-badge rw-level-badge--ouro" id="rw-user-level">OURO</div>
+          <div class="rw-level-info">
+            <span class="rw-level-name">Nível Ouro</span>
+            <span class="rw-level-points">4.250 UP acumulados</span>
+          </div>
+          <div class="rw-level-next">
+            <span class="rw-level-next-label">Próximo: Platina</span>
+            <span class="rw-level-next-pts">Faltam 2.750 UP</span>
+          </div>
+        </div>
+        <div class="rw-level-bar">
+          <div class="rw-level-bar-fill" id="rw-level-bar-fill" style="width: 0%" data-target="60"></div>
+        </div>
+        <div class="rw-level-bar-labels">
+          <span>Bronze</span>
+          <span>Prata</span>
+          <span>Ouro</span>
+          <span>Platina</span>
+          <span>Diamante</span>
+        </div>
+      </div>
+
+      <!-- Cards dos níveis -->
+      <div class="rw-niveis-grid">
+        <div class="rw-nivel-card animate-on-scroll" data-level="bronze">
+          <div class="rw-nivel-top">
+            <div class="rw-nivel-icon rw-nivel-icon--bronze">
+              <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="6"/><path d="M15.477 12.89 17 22l-5-3-5 3 1.523-9.11"/></svg>
+            </div>
+            <span class="rw-nivel-name">Bronze</span>
+          </div>
+          <span class="rw-nivel-range">0 — 1.000 UP</span>
+          <ul class="rw-nivel-perks">
+            <li>Acesso ao programa</li>
+            <li>Cashback básico</li>
+            <li>1 resgate/mês</li>
+          </ul>
+        </div>
+
+        <div class="rw-nivel-card animate-on-scroll" data-level="prata">
+          <div class="rw-nivel-top">
+            <div class="rw-nivel-icon rw-nivel-icon--prata">
+              <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="6"/><path d="M15.477 12.89 17 22l-5-3-5 3 1.523-9.11"/></svg>
+            </div>
+            <span class="rw-nivel-name">Prata</span>
+          </div>
+          <span class="rw-nivel-range">1.001 — 3.000 UP</span>
+          <ul class="rw-nivel-perks">
+            <li>Cashback aumentado</li>
+            <li>2 resgates/mês</li>
+            <li>Descontos parceiros</li>
+          </ul>
+        </div>
+
+        <div class="rw-nivel-card rw-nivel-card--active animate-on-scroll" data-level="ouro">
+          <div class="rw-nivel-top">
+            <div class="rw-nivel-icon rw-nivel-icon--ouro">
+              <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="6"/><path d="M15.477 12.89 17 22l-5-3-5 3 1.523-9.11"/></svg>
+            </div>
+            <span class="rw-nivel-name">Ouro</span>
+            <span class="rw-nivel-current-badge">SEU NÍVEL</span>
+          </div>
+          <span class="rw-nivel-range">3.001 — 7.000 UP</span>
+          <ul class="rw-nivel-perks">
+            <li>Cashback premium</li>
+            <li>Resgates ilimitados</li>
+            <li>Acesso antecipado</li>
+            <li>Bônus em investimentos</li>
+          </ul>
+        </div>
+
+        <div class="rw-nivel-card animate-on-scroll" data-level="platina">
+          <div class="rw-nivel-top">
+            <div class="rw-nivel-icon rw-nivel-icon--platina">
+              <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="6"/><path d="M15.477 12.89 17 22l-5-3-5 3 1.523-9.11"/></svg>
+            </div>
+            <span class="rw-nivel-name">Platina</span>
+          </div>
+          <span class="rw-nivel-range">7.001 — 15.000 UP</span>
+          <ul class="rw-nivel-perks">
+            <li>Tudo do Ouro+</li>
+            <li>Eventos exclusivos</li>
+            <li>Camisas exclusivas</li>
+            <li>Mentorias gamers</li>
+          </ul>
+        </div>
+
+        <div class="rw-nivel-card animate-on-scroll" data-level="diamante">
+          <div class="rw-nivel-top">
+            <div class="rw-nivel-icon rw-nivel-icon--diamante">
+              <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M6 3h12l4 6-10 13L2 9Z"/><path d="M11 3 8 9l4 13 4-13-3-6"/><path d="M2 9h20"/></svg>
+            </div>
+            <span class="rw-nivel-name">Diamante</span>
+          </div>
+          <span class="rw-nivel-range">15.001+ UP</span>
+          <ul class="rw-nivel-perks">
+            <li>Tudo da Platina+</li>
+            <li>Experiências VIP</li>
+            <li>Equipamentos premium</li>
+            <li>Ranking prioritário</li>
+            <li>Suporte dedicado</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       DASHBOARD DO USUÁRIO
+       ============================================================ -->
+  <section id="rw-dashboard" class="section section-sobre" aria-labelledby="rw-dash-title">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-tag animate-on-scroll">Dashboard</span>
+        <h2 id="rw-dash-title" class="section-title animate-on-scroll">
+          Seu painel de <span class="text-green">conquistas</span>
+        </h2>
+      </div>
+
+      <div class="rw-dash-grid">
+        <!-- Saldo UP -->
+        <div class="rw-dash-card rw-dash-card--saldo animate-on-scroll">
+          <span class="rw-dash-card-label">Saldo UP</span>
+          <div class="rw-dash-saldo">
+            <span class="rw-dash-saldo-num" data-count="4250">0</span>
+            <span class="rw-dash-saldo-unit">UP</span>
+          </div>
+          <div class="rw-dash-saldo-trend">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 7 13.5 15.5 8.5 10.5 2 17"/></svg>
+            <span>+380 este mês</span>
+          </div>
+        </div>
+
+        <!-- Nível -->
+        <div class="rw-dash-card animate-on-scroll">
+          <span class="rw-dash-card-label">Nível Atual</span>
+          <div class="rw-dash-level-display">
+            <span class="rw-dash-level-icon rw-nivel-icon--ouro-sm">OURO</span>
+          </div>
+          <span class="rw-dash-next-goal">Faltam 2.750 para Platina</span>
+        </div>
+
+        <!-- Próximo objetivo -->
+        <div class="rw-dash-card animate-on-scroll">
+          <span class="rw-dash-card-label">Próximo Objetivo</span>
+          <div class="rw-dash-objetivo">
+            <span class="rw-dash-objetivo-name">Headset Gamer HyperX</span>
+            <span class="rw-dash-objetivo-pts">8.500 UP</span>
+          </div>
+          <div class="rw-dash-objetivo-bar">
+            <div class="rw-dash-objetivo-bar-fill" data-target="50"></div>
+          </div>
+          <span class="rw-dash-objetivo-progress">50% alcançado</span>
+        </div>
+
+        <!-- Pontuação mensal (mini gráfico) -->
+        <div class="rw-dash-card animate-on-scroll">
+          <span class="rw-dash-card-label">Pontuação Mensal</span>
+          <div class="rw-dash-chart">
+            <div class="rw-dash-bar" style="--h: 30%" data-label="Jan"></div>
+            <div class="rw-dash-bar" style="--h: 50%" data-label="Fev"></div>
+            <div class="rw-dash-bar" style="--h: 40%" data-label="Mar"></div>
+            <div class="rw-dash-bar" style="--h: 65%" data-label="Abr"></div>
+            <div class="rw-dash-bar" style="--h: 55%" data-label="Mai"></div>
+            <div class="rw-dash-bar rw-dash-bar--current" style="--h: 80%" data-label="Jun"></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Últimas atividades -->
+      <div class="rw-dash-atividades animate-on-scroll">
+        <h3 class="rw-dash-atividades-title">Últimas movimentações</h3>
+        <div class="rw-dash-atividades-list">
+          <div class="rw-dash-atividade">
+            <div class="rw-dash-atividade-icon rw-dash-atividade-icon--plus">+120 UP</div>
+            <div class="rw-dash-atividade-info">
+              <span class="rw-dash-atividade-name">Compra no cartão — Mercado Livre</span>
+              <span class="rw-dash-atividade-date">Hoje, 14:32</span>
+            </div>
+          </div>
+          <div class="rw-dash-atividade">
+            <div class="rw-dash-atividade-icon rw-dash-atividade-icon--plus">+85 UP</div>
+            <div class="rw-dash-atividade-info">
+              <span class="rw-dash-atividade-name">Investimento — CDB 120 dias</span>
+              <span class="rw-dash-atividade-date">Ontem, 09:15</span>
+            </div>
+          </div>
+          <div class="rw-dash-atividade">
+            <div class="rw-dash-atividade-icon rw-dash-atividade-icon--minus">-2.000 UP</div>
+            <div class="rw-dash-atividade-info">
+              <span class="rw-dash-atividade-name">Resgate — Steam Wallet R$50</span>
+              <span class="rw-dash-atividade-date">22/06, 18:45</span>
+            </div>
+          </div>
+          <div class="rw-dash-atividade">
+            <div class="rw-dash-atividade-icon rw-dash-atividade-icon--plus">+45 UP</div>
+            <div class="rw-dash-atividade-info">
+              <span class="rw-dash-atividade-name">PIX enviado via App</span>
+              <span class="rw-dash-atividade-date">21/06, 11:20</span>
+            </div>
+          </div>
+          <div class="rw-dash-atividade">
+            <div class="rw-dash-atividade-icon rw-dash-atividade-icon--plus">+200 UP</div>
+            <div class="rw-dash-atividade-info">
+              <span class="rw-dash-atividade-name">Compra no cartão — iFood</span>
+              <span class="rw-dash-atividade-date">20/06, 20:03</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       RANKING
+       ============================================================ -->
+  <section id="rw-ranking" class="section section-campeonatos" aria-labelledby="rw-rank-title">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-tag animate-on-scroll">Ranking</span>
+        <h2 id="rw-rank-title" class="section-title animate-on-scroll">
+          Top jogadores do <span class="text-green">mês</span>
+        </h2>
+      </div>
+
+      <div class="rw-ranking-list animate-on-scroll">
+        <div class="rw-ranking-item rw-ranking-item--1">
+          <div class="rw-ranking-pos"><span class="rw-ranking-medal rw-ranking-medal--gold">1</span></div>
+          <div class="rw-ranking-avatar">SN</div>
+          <div class="rw-ranking-info">
+            <span class="rw-ranking-name">ShadowNinja</span>
+            <span class="rw-ranking-level">Nível Diamante</span>
+          </div>
+          <div class="rw-ranking-pts">32.450 UP</div>
+        </div>
+        <div class="rw-ranking-item rw-ranking-item--2">
+          <div class="rw-ranking-pos"><span class="rw-ranking-medal rw-ranking-medal--silver">2</span></div>
+          <div class="rw-ranking-avatar">CX</div>
+          <div class="rw-ranking-info">
+            <span class="rw-ranking-name">CyberXploder</span>
+            <span class="rw-ranking-level">Nível Diamante</span>
+          </div>
+          <div class="rw-ranking-pts">28.900 UP</div>
+        </div>
+        <div class="rw-ranking-item rw-ranking-item--3">
+          <div class="rw-ranking-pos"><span class="rw-ranking-medal rw-ranking-medal--bronze">3</span></div>
+          <div class="rw-ranking-avatar">NF</div>
+          <div class="rw-ranking-info">
+            <span class="rw-ranking-name">NightFury</span>
+            <span class="rw-ranking-level">Nível Platina</span>
+          </div>
+          <div class="rw-ranking-pts">21.300 UP</div>
+        </div>
+        <div class="rw-ranking-item">
+          <div class="rw-ranking-pos"><span>4</span></div>
+          <div class="rw-ranking-avatar">QL</div>
+          <div class="rw-ranking-info">
+            <span class="rw-ranking-name">QuickLoot</span>
+            <span class="rw-ranking-level">Nível Platina</span>
+          </div>
+          <div class="rw-ranking-pts">18.750 UP</div>
+        </div>
+        <div class="rw-ranking-item">
+          <div class="rw-ranking-pos"><span>5</span></div>
+          <div class="rw-ranking-avatar">PD</div>
+          <div class="rw-ranking-info">
+            <span class="rw-ranking-name">PixelDrift</span>
+            <span class="rw-ranking-level">Nível Ouro</span>
+          </div>
+          <div class="rw-ranking-pts">15.200 UP</div>
+        </div>
+        <div class="rw-ranking-item rw-ranking-item--you">
+          <div class="rw-ranking-pos"><span>47</span></div>
+          <div class="rw-ranking-avatar rw-ranking-avatar--you">VC</div>
+          <div class="rw-ranking-info">
+            <span class="rw-ranking-name">Você</span>
+            <span class="rw-ranking-level">Nível Ouro</span>
+          </div>
+          <div class="rw-ranking-pts">4.250 UP</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       RECOMPENSAS EM DESTAQUE — Carrossel
+       ============================================================ -->
+  <section id="rw-destaques" class="section section-beneficios" aria-labelledby="rw-dest-title">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-tag animate-on-scroll">Destaques</span>
+        <h2 id="rw-dest-title" class="section-title animate-on-scroll">
+          Recompensas em <span class="text-green">destaque</span>
+        </h2>
+      </div>
+
+      <div class="rw-carrossel-wrapper animate-on-scroll">
+        <button class="rw-carrossel-arrow rw-carrossel-arrow--left" id="carrossel-prev" aria-label="Anterior">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="m15 18-6-6 6-6"/></svg>
+        </button>
+
+        <div class="rw-carrossel" id="rw-carrossel">
+          <div class="rw-carrossel-track" id="carrossel-track">
+            <!-- Gerado via JS -->
+          </div>
+        </div>
+
+        <button class="rw-carrossel-arrow rw-carrossel-arrow--right" id="carrossel-next" aria-label="Próximo">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6"/></svg>
+        </button>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       COMO FUNCIONA — Timeline
+       ============================================================ -->
+  <section id="rw-como-funciona" class="section section-como-participar" aria-labelledby="rw-func-title">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-tag animate-on-scroll">Como Funciona</span>
+        <h2 id="rw-func-title" class="section-title animate-on-scroll">
+          Simples de <span class="text-green">entender</span>
+        </h2>
+      </div>
+
+      <ol class="timeline">
+        <li class="timeline-item animate-on-scroll">
+          <div class="timeline-marker" aria-hidden="true"><span class="timeline-number">01</span></div>
+          <div class="timeline-content">
+            <div class="timeline-icon" aria-hidden="true">
+              <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3 21h18"/><path d="M5 21V7l8-4v18"/><path d="M19 21V11l-6-4"/></svg>
+            </div>
+            <h3 class="timeline-title">Abra sua conta</h3>
+            <p class="timeline-desc">Abra sua conta digital Sicredi e torne-se associado. O processo é 100% online e gratuito.</p>
+          </div>
+        </li>
+        <li class="timeline-item animate-on-scroll">
+          <div class="timeline-marker" aria-hidden="true"><span class="timeline-number">02</span></div>
+          <div class="timeline-content">
+            <div class="timeline-icon" aria-hidden="true">
+              <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect width="22" height="16" x="1" y="4" rx="2"/><line x1="1" x2="23" y1="10" y2="10"/></svg>
+            </div>
+            <h3 class="timeline-title">Utilize produtos Sicredi</h3>
+            <p class="timeline-desc">Compre com o cartão, invista, faça PIX, contrate produtos — cada ação gera UP.</p>
+          </div>
+        </li>
+        <li class="timeline-item animate-on-scroll">
+          <div class="timeline-marker" aria-hidden="true"><span class="timeline-number">03</span></div>
+          <div class="timeline-content">
+            <div class="timeline-icon" aria-hidden="true">
+              <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="m12 2-3.09 6.26L2 9.27l5 4.87L5.82 21 12 17.27 18.18 21l-1.18-6.88 5-4.87-6.91-1.01Z"/></svg>
+            </div>
+            <h3 class="timeline-title">Ganhe UP automaticamente</h3>
+            <p class="timeline-desc">Os pontos são creditados automaticamente na sua conta UP Rewards. Sem necessidade de cadastro extra.</p>
+          </div>
+        </li>
+        <li class="timeline-item animate-on-scroll">
+          <div class="timeline-marker" aria-hidden="true"><span class="timeline-number">04</span></div>
+          <div class="timeline-content">
+            <div class="timeline-icon" aria-hidden="true">
+              <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16Z"/><path d="m3.3 7 8.7 5 8.7-5"/><path d="M12 22V12"/></svg>
+            </div>
+            <h3 class="timeline-title">Acumule pontos</h3>
+            <p class="timeline-desc">Suba de nível e desbloqueie benefícios cada vez melhores. O sky é o limite.</p>
+          </div>
+        </li>
+        <li class="timeline-item animate-on-scroll">
+          <div class="timeline-marker" aria-hidden="true"><span class="timeline-number">05</span></div>
+          <div class="timeline-content">
+            <div class="timeline-icon" aria-hidden="true">
+              <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="6"/><path d="M15.477 12.89 17 22l-5-3-5 3 1.523-9.11"/></svg>
+            </div>
+            <h3 class="timeline-title">Troque por recompensas</h3>
+            <p class="timeline-desc">Escolha entre games, criptomoedas, cashback, equipamentos e muito mais. Resgate quando quiser.</p>
+          </div>
+        </li>
+      </ol>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       FAQ
+       ============================================================ -->
+  <section id="rw-faq" class="section section-faq" aria-labelledby="rw-faq-title">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-tag animate-on-scroll">Dúvidas</span>
+        <h2 id="rw-faq-title" class="section-title animate-on-scroll">
+          Perguntas <span class="text-green">frequentes</span>
+        </h2>
+      </div>
+
+      <div class="faq-list">
+        <div class="faq-item animate-on-scroll">
+          <button class="faq-question" aria-expanded="false"><span>Como ganho UP?</span><svg class="faq-arrow" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></button>
+          <div class="faq-answer"><p>Você ganha UP automaticamente ao utilizar produtos Sicredi: compras no cartão de crédito, investimentos, pagamentos via app, PIX, contratação de seguros, consórcios e outros produtos financeiros.</p></div>
+        </div>
+        <div class="faq-item animate-on-scroll">
+          <button class="faq-question" aria-expanded="false"><span>Os pontos UP expiram?</span><svg class="faq-arrow" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></button>
+          <div class="faq-answer"><p>Os pontos UP têm validade de 24 meses a partir da data de crédito. Enquanto você mantiver sua conta ativa, seus pontos continuam acumulados. Níveis superiores podem ter prazos estendidos.</p></div>
+        </div>
+        <div class="faq-item animate-on-scroll">
+          <button class="faq-question" aria-expanded="false"><span>Existe limite de acúmulo?</span><svg class="faq-arrow" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></button>
+          <div class="faq-answer"><p>Não existe limite mensal para acúmulo de UP. Quanto mais você utiliza os produtos da cooperativa, mais pontos ganha. Alguns produtos podem ter multiplicadores especiais em períodos promocionais.</p></div>
+        </div>
+        <div class="faq-item animate-on-scroll">
+          <button class="faq-question" aria-expanded="false"><span>Como resgato minhas recompensas?</span><svg class="faq-arrow" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></button>
+          <div class="faq-answer"><p>Acesse a vitrine de recompensas nesta página, escolha o item desejado e clique em "Resgatar". Os pontos são descontados automaticamente do seu saldo. Para produtos digitais, o código é enviado por e-mail.</p></div>
+        </div>
+        <div class="faq-item animate-on-scroll">
+          <button class="faq-question" aria-expanded="false"><span>Quanto vale 1 UP?</span><svg class="faq-arrow" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></button>
+          <div class="faq-answer"><p>O valor de 1 UP varia conforme o nível do associado e o tipo de resgate. Em média, 100 UP equivalem a aproximadamente R$ 1,00 em recompensas. Níveis superiores têm taxas mais vantajosas.</p></div>
+        </div>
+        <div class="faq-item animate-on-scroll">
+          <button class="faq-question" aria-expanded="false"><span>Quando recebo meus pontos?</span><svg class="faq-arrow" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></button>
+          <div class="faq-answer"><p>Os UP de compras no cartão são creditados em até 2 dias úteis. Para investimentos, o crédito ocorre na data de aportes. Transações via app são creditadas na mesma hora.</p></div>
+        </div>
+        <div class="faq-item animate-on-scroll">
+          <button class="faq-question" aria-expanded="false"><span>Posso trocar por cashback?</span><svg class="faq-arrow" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></button>
+          <div class="faq-answer"><p>Sim! O cashback é uma das opções de resgate mais populares. Você pode optar por receber o valor diretamente na sua conta corrente ou usar como abatimento em faturas do cartão.</p></div>
+        </div>
+        <div class="faq-item animate-on-scroll">
+          <button class="faq-question" aria-expanded="false"><span>Posso trocar por moedas digitais de jogos?</span><svg class="faq-arrow" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></button>
+          <div class="faq-answer"><p>Sim! Oferecemos moedas para diversas plataformas: Valorant Points, Riot Points, V-Bucks, Robux, Steam Wallet, Xbox Gift Card, PlayStation Gift Card e Nintendo eShop. Os códigos são enviados por e-mail após o resgate.</p></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       CTA FINAL
+       ============================================================ -->
+  <section id="rw-cta" class="rw-cta-section" aria-labelledby="rw-cta-title">
+    <div class="rw-cta-glow" aria-hidden="true"></div>
+    <div class="container">
+      <div class="rw-cta-content animate-on-scroll">
+        <h2 id="rw-cta-title" class="rw-cta-title">Comece hoje mesmo a acumular UP.</h2>
+        <p class="rw-cta-text">Quanto mais você utiliza os produtos da cooperativa, maiores são suas recompensas. Não perca tempo.</p>
+        <div class="rw-cta-buttons">
+          <a href="#rw-simulador" class="btn btn-primary btn-lg">
+            <span>Quero acumular UP</span>
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+          </a>
+          <a href="index.html#inscricao" class="btn btn-secondary btn-lg">Abrir minha conta</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       FOOTER — Idêntico à Landing Page
+       ============================================================ -->
+  <footer class="footer" role="contentinfo">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <a href="index.html" class="footer-logo-link" aria-label="Sicredi Up Academy - Home">
+            <img src="logo1.png" alt="Up Academy Logo" class="footer-logo-img" width="180" height="60" loading="lazy">
+          </a>
+          <p class="footer-desc">Conectando o universo gamer com educação financeira e cooperativismo. Uma iniciativa Sicredi para transformar o futuro dos jovens.</p>
+          <div class="footer-social">
+            <a href="#" class="social-link" aria-label="Instagram">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="20" x="2" y="2" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" x2="17.51" y1="6.5" y2="6.5"/></svg>
+            </a>
+            <a href="#" class="social-link" aria-label="Discord">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M20.317 4.37a19.791 19.791 0 0 0-4.885-1.515.074.074 0 0 0-.079.037c-.21.375-.444.864-.608 1.25a18.27 18.27 0 0 0-5.487 0 12.64 12.64 0 0 0-.617-1.25.077.077 0 0 0-.079-.037A19.736 19.736 0 0 0 3.677 4.37a.07.07 0 0 0-.032.027C.533 9.046-.32 13.58.099 18.057a.082.082 0 0 0 .031.057 19.9 19.9 0 0 0 5.993 3.03.078.078 0 0 0 .084-.028c.462-.63.874-1.295 1.226-1.994a.076.076 0 0 0-.041-.106 13.107 13.107 0 0 1-1.872-.892.077.077 0 0 1-.008-.128 10.2 10.2 0 0 0 .372-.292.074.074 0 0 1 .077-.01c3.928 1.793 8.18 1.793 12.062 0a.074.074 0 0 1 .078.01c.12.098.246.198.373.292a.077.077 0 0 1-.006.127 12.299 12.299 0 0 1-1.873.892.077.077 0 0 0-.041.107c.36.698.772 1.362 1.225 1.993a.076.076 0 0 0 .084.028 19.839 19.839 0 0 0 6.002-3.03.077.077 0 0 0 .032-.054c.5-5.177-.838-9.674-3.549-13.66a.061.061 0 0 0-.031-.03zM8.02 15.33c-1.183 0-2.157-1.085-2.157-2.419 0-1.333.956-2.419 2.157-2.419 1.21 0 2.176 1.095 2.157 2.42 0 1.333-.956 2.418-2.157 2.418zm7.975 0c-1.183 0-2.157-1.085-2.157-2.419 0-1.333.955-2.419 2.157-2.419 1.21 0 2.176 1.095 2.157 2.42 0 1.333-.946 2.418-2.157 2.418z"/></svg>
+            </a>
+          </div>
+        </div>
+        <div class="footer-links-group">
+          <h4 class="footer-links-title">Links</h4>
+          <ul class="footer-links">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="index.html#campeonatos">Campeonatos</a></li>
+            <li><a href="up-rewards.html">UP Rewards</a></li>
+            <li><a href="index.html#faq">FAQ</a></li>
+          </ul>
+        </div>
+        <div class="footer-links-group">
+          <h4 class="footer-links-title">Legal</h4>
+          <ul class="footer-links">
+            <li><a href="#">Regulamento</a></li>
+            <li><a href="#">Política de Privacidade</a></li>
+            <li><a href="#">Termos de Uso</a></li>
+          </ul>
+        </div>
+        <div class="footer-links-group">
+          <h4 class="footer-links-title">Contato</h4>
+          <ul class="footer-links">
+            <li><a href="mailto:upacademy@sicredi.com.br">upacademy@sicredi.com.br</a></li>
+            <li><a href="#">Discord Oficial</a></li>
+            <li><a href="#">Instagram</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>&copy; 2025 Sicredi Up Academy. Todos os direitos reservados. Uma iniciativa do Sistema Sicredi.</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Botão Voltar ao Topo -->
+  <button id="backToTop" class="back-to-top" aria-label="Voltar ao topo">
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m18 15-6-6-6 6"/></svg>
+  </button>
+
+  <!-- Modal de Resgate -->
+  <div id="resgateModal" class="modal-overlay" role="dialog" aria-modal="true" aria-labelledby="resgate-modal-title" aria-hidden="true">
+    <div class="modal-content">
+      <div class="modal-checkmark" aria-hidden="true">
+        <svg width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="6"/><path d="M15.477 12.89 17 22l-5-3-5 3 1.523-9.11"/></svg>
+      </div>
+      <h3 id="resgate-modal-title" class="modal-title">Resgate solicitado!</h3>
+      <p class="modal-text" id="resgate-modal-text">Seu resgate será processado em até 24 horas. Você receberá os detalhes no seu e-mail cadastrado.</p>
+      <button id="resgate-modal-close" class="btn btn-primary btn-modal-close">Entendi</button>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
