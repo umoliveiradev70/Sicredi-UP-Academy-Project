@@ -627,3 +627,436 @@ document.addEventListener('DOMContentLoaded', () => {
   initBackToTop();
 
 });
+
+/**
+ * ============================================================
+ * UP REWARDS — Funcionalidades da página de recompensas
+ * Adicionar ao final do script.js existente
+ * ============================================================
+ */
+
+// Executar apenas se estiver na página de rewards
+if (document.getElementById('rw-hero')) {
+  document.addEventListener('DOMContentLoaded', () => {
+    'use strict';
+
+    /* ==========================================================
+       DADOS DAS RECOMPENSAS
+       Conceito demonstrativo — placeholders editáveis
+       ========================================================== */
+    const RECOMPENSAS = [
+      { id: 1, nome: 'Valorant Points', up: 2000, cat: 'games', emoji: '🔫', gradient: 'rw-rec-gradient--valorant' },
+      { id: 2, nome: 'Riot Points', up: 1800, cat: 'games', emoji: '⚔️', gradient: 'rw-rec-gradient--lol' },
+      { id: 3, nome: 'V-Bucks', up: 1500, cat: 'games', emoji: '🏗️', gradient: 'rw-rec-gradient--fortnite' },
+      { id: 4, nome: 'Diamantes Free Fire', up: 800, cat: 'games', emoji: '🔥', gradient: 'rw-rec-gradient--freefire' },
+      { id: 5, nome: 'EA FC Points', up: 1200, cat: 'games', emoji: '⚽', gradient: 'rw-rec-gradient--eafc' },
+      { id: 6, nome: 'Robux', up: 1000, cat: 'games', emoji: '🧱', gradient: 'rw-rec-gradient--roblox' },
+      { id: 7, nome: 'Steam Wallet R$50', up: 5000, cat: 'games', emoji: '🎮', gradient: 'rw-rec-gradient--steam' },
+      { id: 8, nome: 'Xbox Gift Card R$50', up: 5200, cat: 'games', emoji: '🟢', gradient: 'rw-rec-gradient--xbox' },
+      { id: 9, nome: 'PlayStation Gift Card R$50', up: 5200, cat: 'games', emoji: '🔵', gradient: 'rw-rec-gradient--playstation' },
+      { id: 10, nome: 'Nintendo eShop R$50', up: 5200, cat: 'games', emoji: '🔴', gradient: 'rw-rec-gradient--nintendo' },
+      { id: 11, nome: 'Bitcoin (fractional)', up: 50000, cat: 'crypto', emoji: '₿', gradient: 'rw-rec-gradient--bitcoin' },
+      { id: 12, nome: 'Ethereum (fractional)', up: 35000, cat: 'crypto', emoji: 'Ξ', gradient: 'rw-rec-gradient--ethereum' },
+      { id: 13, nome: 'USDC R$25', up: 2500, cat: 'crypto', emoji: '💵', gradient: 'rw-rec-gradient--usdc' },
+      { id: 14, nome: 'Solana (fractional)', up: 8000, cat: 'crypto', emoji: '◎', gradient: 'rw-rec-gradient--solana' },
+      { id: 15, nome: 'Polygon (fractional)', up: 5000, cat: 'crypto', emoji: '🔷', gradient: 'rw-rec-gradient--polygon' },
+      { id: 16, nome: 'Cashback R$20', up: 2200, cat: 'cashback', emoji: '💰', gradient: 'rw-rec-gradient--cashback' },
+      { id: 17, nome: 'Cashback R$50', up: 5300, cat: 'cashback', emoji: '💵', gradient: 'rw-rec-gradient--cashback' },
+      { id: 18, nome: 'Desconto 15% Parceiros', up: 1500, cat: 'cashback', emoji: '🏷️', gradient: 'rw-rec-gradient--desconto' },
+      { id: 19, nome: 'Headset Gamer', up: 15000, cat: 'equipamentos', emoji: '🎧', gradient: 'rw-rec-gradient--headset' },
+      { id: 20, nome: 'Teclado Mecânico', up: 12000, cat: 'equipamentos', emoji: '⌨️', gradient: 'rw-rec-gradient--teclado' },
+      { id: 21, nome: 'Mouse Gamer', up: 8000, cat: 'equipamentos', emoji: '🖱️', gradient: 'rw-rec-gradient--mouse' },
+      { id: 22, nome: 'Monitor Gamer 24"', up: 30000, cat: 'equipamentos', emoji: '🖥️', gradient: 'rw-rec-gradient--monitor' },
+      { id: 23, nome: 'Camisa Exclusiva UP', up: 3000, cat: 'eventos', emoji: '👕', gradient: 'rw-rec-gradient--camisa' },
+      { id: 24, nome: 'Ingresso Evento E-Sports', up: 5000, cat: 'eventos', emoji: '🎫', gradient: 'rw-rec-gradient--evento' },
+    ];
+
+    const CARROSSEL_ITEMS = [
+      { nome: 'Valorant Points', up: 2000, emoji: '🔫', gradient: 'rw-rec-gradient--valorant' },
+      { nome: 'V-Bucks', up: 1500, emoji: '🏗️', gradient: 'rw-rec-gradient--fortnite' },
+      { nome: 'Bitcoin', up: 50000, emoji: '₿', gradient: 'rw-rec-gradient--bitcoin' },
+      { nome: 'Cashback R$50', up: 5300, emoji: '💵', gradient: 'rw-rec-gradient--cashback' },
+      { nome: 'Steam Wallet R$50', up: 5000, emoji: '🎮', gradient: 'rw-rec-gradient--steam' },
+      { nome: 'Gift Card R$100', up: 10500, emoji: '🎁', gradient: 'rw-rec-gradient--giftcard' },
+      { nome: 'Headset Gamer', up: 15000, emoji: '🎧', gradient: 'rw-rec-gradient--headset' },
+    ];
+
+
+    /* ==========================================================
+       PARTÍCULAS DO HERO REWARDS
+       ========================================================== */
+    const initRewardsHeroParticles = () => {
+      const canvas = document.getElementById('rwHeroCanvas');
+      if (!canvas) return;
+
+      const ctx = canvas.getContext('2d');
+      let particles = [];
+      let animId = null;
+
+      const resize = () => {
+        const rect = canvas.parentElement.getBoundingClientRect();
+        canvas.width = rect.width;
+        canvas.height = rect.height;
+      };
+      resize();
+      window.addEventListener('resize', debounce(resize, 200));
+
+      class P {
+        constructor(init) {
+          this.x = Math.random() * canvas.width;
+          this.y = init ? Math.random() * canvas.height : canvas.height + Math.random() * 40;
+          this.s = Math.random() * 2 + 0.6;
+          this.sy = -(Math.random() * 0.4 + 0.1);
+          this.sx = (Math.random() - 0.5) * 0.2;
+          this.o = Math.random() * 0.4 + 0.08;
+          this.f = Math.random() * 0.001 + 0.0005;
+        }
+        update() {
+          this.x += this.sx;
+          this.y += this.sy;
+          this.o -= this.f;
+          if (this.o <= 0 || this.y < -20) {
+            this.x = Math.random() * canvas.width;
+            this.y = canvas.height + Math.random() * 40;
+            this.o = Math.random() * 0.4 + 0.08;
+          }
+        }
+        draw() {
+          ctx.beginPath();
+          ctx.arc(this.x, this.y, this.s, 0, Math.PI * 2);
+          ctx.fillStyle = `rgba(0,168,89,${Math.max(0, this.o)})`;
+          ctx.fill();
+        }
+      }
+
+      const create = () => {
+        particles = [];
+        const n = Math.min(70, Math.max(20, Math.floor(canvas.width * canvas.height / 15000)));
+        for (let i = 0; i < n; i++) particles.push(new P(true));
+      };
+      create();
+      window.addEventListener('resize', debounce(create, 300));
+
+      const animate = () => {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        particles.forEach(p => { p.update(); p.draw(); });
+        animId = requestAnimationFrame(animate);
+      };
+      animate();
+
+      const obs = new IntersectionObserver(([e]) => {
+        if (e.isIntersecting) { if (!animId) animate(); }
+        else { cancelAnimationFrame(animId); animId = null; }
+      }, { threshold: 0.05 });
+      obs.observe(canvas);
+    };
+
+
+    /* ==========================================================
+       GERAR CARDS DE RECOMPENSA
+       ========================================================== */
+    const renderRecompensas = () => {
+      const grid = document.getElementById('rw-recompensas-grid');
+      if (!grid) return;
+
+      grid.innerHTML = RECOMPENSAS.map(r => `
+        <div class="rw-rec-card animate-on-scroll" data-cat="${r.cat}">
+          <div class="rw-rec-card-image ${r.gradient}">
+            <span class="rw-rec-card-cat">${r.cat}</span>
+            <span>${r.emoji}</span>
+          </div>
+          <div class="rw-rec-card-content">
+            <h4 class="rw-rec-card-name">${r.nome}</h4>
+            <div class="rw-rec-card-price">
+              <span class="rw-rec-card-up">${r.up.toLocaleString('pt-BR')}</span>
+              <span class="rw-rec-card-up-label">UP</span>
+            </div>
+            <button class="rw-rec-card-btn" data-name="${r.nome}" data-up="${r.up}">Resgatar</button>
+          </div>
+        </div>
+      `).join('');
+
+      // Re-observar para animações de scroll
+      const obs = new IntersectionObserver(
+        (entries) => entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); obs.unobserve(e.target); } }),
+        { threshold: 0.08, rootMargin: '0px 0px -30px 0px' }
+      );
+      grid.querySelectorAll('.animate-on-scroll').forEach(el => obs.observe(el));
+
+      // Eventos de resgate
+      grid.querySelectorAll('.rw-rec-card-btn').forEach(btn => {
+        btn.addEventListener('click', () => {
+          document.getElementById('resgate-modal-text').textContent =
+            `Seu resgate de "${btn.dataset.name}" (${parseInt(btn.dataset.up).toLocaleString('pt-BR')} UP) será processado em até 24 horas.`;
+          openResgateModal();
+        });
+      });
+    };
+
+
+    /* ==========================================================
+       FILTRO DE CATEGORIAS
+       ========================================================== */
+    const initFiltros = () => {
+      const btns = document.querySelectorAll('.rw-filter-btn');
+      const cards = document.querySelectorAll('.rw-rec-card');
+      if (!btns.length || !cards.length) return;
+
+      btns.forEach(btn => {
+        btn.addEventListener('click', () => {
+          btns.forEach(b => b.classList.remove('active'));
+          btn.classList.add('active');
+
+          const filter = btn.dataset.filter;
+          cards.forEach(card => {
+            if (filter === 'all' || card.dataset.cat === filter) {
+              card.style.display = '';
+              // Re-trigger animation
+              card.classList.remove('visible');
+              requestAnimationFrame(() => card.classList.add('visible'));
+            } else {
+              card.style.display = 'none';
+            }
+          });
+        });
+      });
+    };
+
+
+    /* ==========================================================
+       CARROSSEL DE DESTAQUES
+       ========================================================== */
+    const initCarrossel = () => {
+      const track = document.getElementById('carrossel-track');
+      const prev = document.getElementById('carrossel-prev');
+      const next = document.getElementById('carrossel-next');
+      if (!track || !prev || !next) return;
+
+      // Gerar itens
+      track.innerHTML = CARROSSEL_ITEMS.map(item => `
+        <div class="rw-carrossel-item">
+          <div class="rw-rec-card">
+            <div class="rw-rec-card-image ${item.gradient}" style="height:100px">
+              <span>${item.emoji}</span>
+            </div>
+            <div class="rw-rec-card-content">
+              <h4 class="rw-rec-card-name">${item.nome}</h4>
+              <div class="rw-rec-card-price">
+                <span class="rw-rec-card-up">${item.up.toLocaleString('pt-BR')}</span>
+                <span class="rw-rec-card-up-label">UP</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      `).join('');
+
+      let pos = 0;
+      const itemWidth = 260; // 240 + 20 gap
+
+      const move = () => {
+        const maxScroll = track.scrollWidth - track.parentElement.offsetWidth;
+        pos = Math.max(0, Math.min(pos, maxScroll));
+        track.style.transform = `translateX(-${pos}px)`;
+      };
+
+      prev.addEventListener('click', () => { pos -= itemWidth; move(); });
+      next.addEventListener('click', () => { pos += itemWidth; move(); });
+
+      // Touch/drag
+      let startX = 0, isDragging = false;
+      track.addEventListener('touchstart', (e) => { startX = e.touches[0].clientX; isDragging = true; }, { passive: true });
+      track.addEventListener('touchend', (e) => {
+        if (!isDragging) return;
+        isDragging = false;
+        const diff = startX - e.changedTouches[0].clientX;
+        if (Math.abs(diff) > 40) { pos += diff > 0 ? itemWidth : -itemWidth; move(); }
+      });
+    };
+
+
+    /* ==========================================================
+       SIMULADOR DE GANHOS
+       ========================================================== */
+    const initSimulador = () => {
+      const btn = document.getElementById('sim-calcular');
+      if (!btn) return;
+
+      // Multiplicadores por tipo de investimento
+      const multipliers = { tesouro: 2.0, cdb: 2.5, lci: 1.5, fundos: 3.0, rv: 4.0 };
+
+      btn.addEventListener('click', () => {
+        const cartao = parseFloat(document.getElementById('sim-cartao').value) || 0;
+        const investimento = parseFloat(document.getElementById('sim-investimento').value) || 0;
+        const tipo = document.getElementById('sim-tipo').value;
+        const prazo = parseInt(document.getElementById('sim-prazo').value) || 1;
+
+        // Cálculo conceito demonstrativo
+        const upCartao = Math.round(cartao * 1.5);
+        const mult = multipliers[tipo] || 2;
+        const upInvestimento = Math.round(investimento * mult * (prazo / 6));
+        const total = upCartao + upInvestimento;
+
+        // Animar resultado
+        const resultEl = document.getElementById('sim-result');
+        const countEl = document.getElementById('sim-up-count');
+        const barEl = document.getElementById('sim-bar-fill');
+        const barLabel = document.getElementById('sim-bar-label');
+        const equivEl = document.getElementById('sim-equiv');
+        const coinsEl = document.getElementById('sim-coins');
+
+        resultEl.classList.add('active');
+        countEl.textContent = '0';
+        barEl.style.width = '0%';
+
+        // Contador animado
+        const duration = 1500;
+        const start = performance.now();
+        const maxBar = Math.min(100, total / 1000);
+
+        const step = (now) => {
+          const progress = Math.min((now - start) / duration, 1);
+          const eased = 1 - Math.pow(1 - progress, 3);
+          const current = Math.round(eased * total);
+
+          countEl.textContent = current.toLocaleString('pt-BR');
+          barEl.style.width = `${(eased * maxBar)}%`;
+          barLabel.textContent = `${Math.round(eased * maxBar)}%`;
+
+          if (progress < 1) requestAnimationFrame(step);
+        };
+        requestAnimationFrame(step);
+
+        // Equivalente em R$ (conceito: ~100 UP = R$1)
+        equivEl.textContent = `Equivalente a aproximadamente R$ ${(total / 100).toFixed(2)} em recompensas`;
+
+        // Moedas voadoras
+        coinsEl.innerHTML = '';
+        for (let i = 0; i < 12; i++) {
+          const coin = document.createElement('span');
+          coin.className = 'rw-sim-coin-fly';
+          coin.textContent = 'UP';
+          coin.style.left = `${Math.random() * 80 + 10}%`;
+          coin.style.top = `${Math.random() * 80 + 10}%`;
+          coin.style.setProperty('--tx', `${(Math.random() - 0.5) * 100}px`);
+          coin.style.setProperty('--ty', `${-Math.random() * 80 - 20}px`);
+          coin.style.animationDelay = `${i * 0.08}s`;
+          coinsEl.appendChild(coin);
+        }
+        setTimeout(() => { coinsEl.innerHTML = ''; }, 2000);
+      });
+    };
+
+
+    /* ==========================================================
+       BARRA DE NÍVEL ANIMADA
+       ========================================================== */
+    const initLevelBar = () => {
+      const bar = document.getElementById('rw-level-bar-fill');
+      if (!bar) return;
+
+      const obs = new IntersectionObserver(([e]) => {
+        if (e.isIntersecting) {
+          bar.style.width = `${bar.dataset.target}%`;
+          obs.unobserve(bar);
+        }
+      }, { threshold: 0.5 });
+      obs.observe(bar);
+    };
+
+
+    /* ==========================================================
+       DASHBOARD — Contadores e barras animadas
+       ========================================================== */
+    const initDashboard = () => {
+      // Contador do saldo
+      const saldoEl = document.querySelector('.rw-dash-saldo-num[data-count]');
+      if (saldoEl) {
+        const target = parseInt(saldoEl.dataset.count, 10);
+        const obs = new IntersectionObserver(([e]) => {
+          if (e.isIntersecting) {
+            const start = performance.now();
+            const step = (now) => {
+              const p = Math.min((now - start) / 1200, 1);
+              saldoEl.textContent = Math.round((1 - Math.pow(1 - p, 3)) * target).toLocaleString('pt-BR');
+              if (p < 1) requestAnimationFrame(step);
+            };
+            requestAnimationFrame(step);
+            obs.unobserve(saldoEl);
+          }
+        }, { threshold: 0.5 });
+        obs.observe(saldoEl);
+      }
+
+      // Barra do objetivo
+      document.querySelectorAll('.rw-dash-objetivo-bar-fill[data-target]').forEach(bar => {
+        const obs = new IntersectionObserver(([e]) => {
+          if (e.isIntersecting) {
+            bar.style.width = `${bar.dataset.target}%`;
+            obs.unobserve(bar);
+          }
+        }, { threshold: 0.5 });
+        obs.observe(bar);
+      });
+
+      // Barras do gráfico mensal
+      document.querySelectorAll('.rw-dash-bar').forEach((bar, i) => {
+        const h = bar.style.getPropertyValue('--h');
+        bar.style.height = '0%';
+        const obs = new IntersectionObserver(([e]) => {
+          if (e.isIntersecting) {
+            setTimeout(() => { bar.style.height = h; }, i * 100);
+            obs.unobserve(bar);
+          }
+        }, { threshold: 0.3 });
+        obs.observe(bar);
+      });
+    };
+
+
+    /* ==========================================================
+       MODAL DE RESGATE
+       ========================================================== */
+    const openResgateModal = () => {
+      const m = document.getElementById('resgateModal');
+      if (!m) return;
+      m.classList.add('active');
+      m.setAttribute('aria-hidden', 'false');
+      document.body.style.overflow = 'hidden';
+      setTimeout(() => { const b = document.getElementById('resgate-modal-close'); if (b) b.focus(); }, 350);
+    };
+
+    const closeResgateModal = () => {
+      const m = document.getElementById('resgateModal');
+      if (!m) return;
+      m.classList.remove('active');
+      m.setAttribute('aria-hidden', 'true');
+      document.body.style.overflow = '';
+    };
+
+    const initResgateModal = () => {
+      const m = document.getElementById('resgateModal');
+      const close = document.getElementById('resgate-modal-close');
+      if (!m) return;
+
+      if (close) close.addEventListener('click', closeResgateModal);
+      m.addEventListener('click', (e) => { if (e.target === m) closeResgateModal(); });
+      document.addEventListener('keydown', (e) => { if (e.key === 'Escape' && m.classList.contains('active')) closeResgateModal(); });
+    };
+
+
+    /* ==========================================================
+       INICIALIZAR MÓDULOS DA PÁGINA REWARDS
+       Reutiliza funções globais (partículas, nav, scroll, etc.)
+       que já foram inicializadas no script principal
+       ========================================================== */
+    initRewardsHeroParticles();
+    renderRecompensas();
+    initFiltros();
+    initCarrossel();
+    initSimulador();
+    initLevelBar();
+    initDashboard();
+    initResgateModal();
+
+  }); // fecha DOMContentLoaded do rewards
+} // fecha if rw-hero
