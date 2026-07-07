@@ -1,0 +1,632 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+
+  <!-- ========== META & SEO ========== -->
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sicredi Up Academy | Campeonato de E-Sports para Jovens Talentos</title>
+  <meta name="description" content="Participe do maior campeonato de E-Sports do Sicredi Up Academy. Valorant, League of Legends e Counter-Strike 2. Inscreva-se e mostre seu potencial!">
+  <meta name="keywords" content="Sicredi, E-Sports, Valorant, League of Legends, Counter-Strike 2, campeonato gamer, educação financeira, cooperativismo, Up Academy">
+  <meta name="author" content="Sicredi Up Academy">
+  <meta name="robots" content="index, follow">
+
+  <!-- Open Graph -->
+  <meta property="og:title" content="Sicredi Up Academy | Campeonato de E-Sports">
+  <meta property="og:description" content="O maior campeonato de E-Sports para jovens talentos. Valorant, LoL e CS2.">
+  <meta property="og:type" content="website">
+  <meta property="og:locale" content="pt_BR">
+  <meta property="og:image" content="logo1.png">
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Sicredi Up Academy | Campeonato de E-Sports">
+  <meta name="twitter:description" content="O maior campeonato de E-Sports para jovens talentos.">
+  <meta name="twitter:image" content="logo1.png">
+
+  <!-- Favicon — usa a logo do projeto -->
+  <link rel="icon" type="image/png" href="logo1.png">
+
+  <!-- Google Fonts: Poppins -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+
+  <!-- Estilos -->
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+  <!-- ================================================================
+       CANVAS DE PARTÍCULAS GLOBAIS — Fixo, cobre todo o site
+       ================================================================ -->
+  <canvas id="globalParticles" class="global-particles" aria-hidden="true"></canvas>
+
+  <!-- ================================================================
+       NAVEGAÇÃO PRINCIPAL
+       ================================================================ -->
+  <nav id="navbar" class="navbar" role="navigation" aria-label="Navegação principal">
+    <div class="nav-container">
+      <!-- Logo do projeto (arquivo local logo1.png) -->
+      <a href="#hero" class="nav-logo" aria-label="Sicredi Up Academy - Início">
+        <img src="assets/logo1.png" alt="Up Academy Logo" class="nav-logo-img" width="140" height="48">
+      </a>
+
+      <!-- Links de navegação -->
+      <ul class="nav-links" id="navLinks" role="menubar">
+        <li role="none"><a href="#sobre" class="nav-link" role="menuitem">Sobre</a></li>
+        <li role="none"><a href="#campeonatos" class="nav-link" role="menuitem">Campeonatos</a></li>
+        <li role="none"><a href="#como-participar" class="nav-link" role="menuitem">Como Participar</a></li>
+        <li role="none"><a href="#beneficios" class="nav-link" role="menuitem">Benefícios</a></li>
+        <li role="none"><a href="#faq" class="nav-link" role="menuitem">FAQ</a></li>
+        <li role="none"><a href="#inscricao" class="nav-cta" role="menuitem">Inscreva-se</a></li>
+      </ul>
+
+      <!-- Hamburger mobile -->
+      <button class="nav-hamburger" id="hamburger" aria-label="Abrir menu" aria-expanded="false" aria-controls="navLinks">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </div>
+  </nav>
+
+  <!-- ================================================================
+       HERO SECTION
+       ================================================================ -->
+  <section id="hero" class="hero" aria-label="Seção principal">
+    <!-- Canvas de partículas do hero (camada extra) -->
+    <canvas id="particleCanvas" class="hero-particles" aria-hidden="true"></canvas>
+
+    <!-- Glows animados -->
+    <div class="hero-glow hero-glow-1" aria-hidden="true"></div>
+    <div class="hero-glow hero-glow-2" aria-hidden="true"></div>
+    <div class="hero-glow hero-glow-3" aria-hidden="true"></div>
+
+    <!-- Grid pattern -->
+    <div class="hero-grid" aria-hidden="true"></div>
+
+    <!-- Scanline gamer -->
+    <div class="hero-scanline" aria-hidden="true"></div>
+
+    <div class="hero-container">
+      <div class="hero-content">
+        <div class="hero-badge animate-on-scroll" aria-hidden="true">
+          <span class="badge-dot"></span>
+          E-Sports + Educação Financeira
+        </div>
+
+        <h1 class="hero-title animate-on-scroll">
+          <span class="title-sicredi">Sicredi</span>
+          <span class="title-up">UP</span>
+          <span class="title-academy">Academy</span>
+        </h1>
+
+        <p class="hero-subtitle animate-on-scroll">O maior campeonato de E-Sports para jovens talentos.</p>
+
+        <p class="hero-text animate-on-scroll">Mostre seu potencial, dispute campeonatos e faça parte de uma comunidade que acredita no seu futuro.</p>
+
+        <div class="hero-buttons animate-on-scroll">
+          <a href="#inscricao" class="btn btn-primary btn-lg">
+            <span>Quero me inscrever</span>
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+          </a>
+          <a href="#sobre" class="btn btn-secondary btn-lg">Saiba mais</a>
+        </div>
+
+        <div class="hero-games-indicator animate-on-scroll" aria-label="Jogos disponíveis">
+          <span class="game-indicator" data-game="val">VALORANT</span>
+          <span class="game-indicator-divider" aria-hidden="true">•</span>
+          <span class="game-indicator" data-game="lol">LOL</span>
+          <span class="game-indicator-divider" aria-hidden="true">•</span>
+          <span class="game-indicator" data-game="cs2">CS2</span>
+        </div>
+      </div>
+
+      <div class="hero-image animate-on-scroll">
+        <div class="hero-image-wrapper">
+          <img src="assets/campeao.jpg" alt="Jovem gamer competitivo com equipamento profissional" width="600" height="750" loading="eager">
+          <div class="hero-image-overlay" aria-hidden="true"></div>
+          <div class="hero-image-border" aria-hidden="true"></div>
+          <div class="hero-image-tag" aria-hidden="true">
+            <span class="tag-icon">🎮</span>
+            <span>3 Campeonatos</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="hero-scroll-indicator" aria-hidden="true">
+      <span>Scroll</span>
+      <div class="scroll-line"></div>
+    </div>
+  </section>
+
+  <!-- ================================================================
+       SEÇÃO SOBRE
+       ================================================================ -->
+  <section id="sobre" class="section section-sobre" aria-labelledby="sobre-title">
+    <div class="container">
+      <div class="sobre-grid">
+        <div class="sobre-content">
+          <span class="section-tag animate-on-scroll">Sobre o projeto</span>
+          <h2 id="sobre-title" class="section-title animate-on-scroll">
+            O Sicredi acredita no <span class="text-green">desenvolvimento dos jovens</span>
+          </h2>
+          <p class="section-description animate-on-scroll" style="text-align:left; margin:0 0 16px 0;">
+            O Sicredi Up Academy é uma iniciativa inovadora que conecta o universo gamer com educação financeira e cooperativismo. Acreditamos que o esporte eletrônico é uma poderosa ferramenta de engajamento, aprendizado e transformação social.
+          </p>
+          <p class="section-description animate-on-scroll" style="text-align:left; margin:0;">
+            Através de campeonatos de E-Sports, oferecemos aos jovens a oportunidade de desenvolver habilidades como trabalho em equipe, liderança, estratégia e resiliência — competências essenciais para a vida profissional e pessoal.
+          </p>
+
+          <div class="sobre-stats animate-on-scroll">
+            <div class="stat-item">
+              <span class="stat-number" data-target="3">0</span>
+              <span class="stat-label">Jogos</span>
+            </div>
+            <div class="stat-item">
+              <span class="stat-number" data-target="500" data-suffix="+">0</span>
+              <span class="stat-label">Jogadores</span>
+            </div>
+            <div class="stat-item">
+              <span class="stat-number" data-target="10" data-prefix="R$" data-suffix="k+">0</span>
+              <span class="stat-label">Em prêmios</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="sobre-image animate-on-scroll">
+          <div class="sobre-image-wrapper">
+            <img src="assets/arena-gamer.jpg" alt="Comunidade de gamers em evento de E-Sports" width="600" height="500" loading="lazy">
+            <div class="sobre-image-accent" aria-hidden="true"></div>
+            <div class="sobre-image-corner sobre-image-corner--tl" aria-hidden="true"></div>
+            <div class="sobre-image-corner sobre-image-corner--br" aria-hidden="true"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================================================================
+       SEÇÃO CAMPEONATOS — Imagens reais dos jogos
+       ================================================================ -->
+  <section id="campeonatos" class="section section-campeonatos" aria-labelledby="campeonatos-title">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-tag animate-on-scroll">Campeonatos</span>
+        <h2 id="campeonatos-title" class="section-title animate-on-scroll">
+          Escolha seu <span class="text-green">campo de batalha</span>
+        </h2>
+        <p class="section-description animate-on-scroll">
+          Três jogos. Três cenários. Uma única chance de provar que você é o melhor.
+        </p>
+      </div>
+
+      <div class="campeonatos-grid">
+        <!-- Card: Valorant -->
+        <article class="game-card animate-on-scroll" data-game="valorant">
+          <div class="game-card-image">
+            <!-- Imagem temática de Valorant — agente/tático/FPS -->
+            <img src="assets/valorant.jpg" alt="Campeonato de Valorant — FPS Tático competitivo" width="600" height="400" loading="lazy">
+            <div class="game-card-overlay" aria-hidden="true"></div>
+            <span class="game-card-badge">FPS Tático</span>
+            <!-- Logo do jogo -->
+            <div class="game-card-logo" aria-hidden="true">
+              <span class="game-logo-text">VALORANT</span>
+            </div>
+          </div>
+          <div class="game-card-content">
+            <h3 class="game-card-title">Valorant</h3>
+            <p class="game-card-desc">Mostre sua precisão, estratégia e trabalho em equipe no cenário competitivo de Valorant. Forme seu squad e conquiste a vitória.</p>
+            <a href="#inscricao" class="btn btn-card">
+              <span>Quero participar</span>
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+            </a>
+          </div>
+          <div class="game-card-glow" aria-hidden="true"></div>
+        </article>
+
+        <!-- Card: League of Legends -->
+        <article class="game-card animate-on-scroll" data-game="lol">
+          <div class="game-card-image">
+            <!-- Imagem temática de League of Legends — batalha épica/fantasia -->
+            <img src="assets/league-of-legends.jpg" alt="Campeonato de League of Legends — MOBA competitivo" width="600" height="400" loading="lazy">
+            <div class="game-card-overlay" aria-hidden="true"></div>
+            <span class="game-card-badge">MOBA</span>
+            <div class="game-card-logo" aria-hidden="true">
+              <span class="game-logo-text">LEAGUE OF LEGENDS</span>
+            </div>
+          </div>
+          <div class="game-card-content">
+            <h3 class="game-card-title">League of Legends</h3>
+            <p class="game-card-desc">Domine a Summoner's Rift com sua equipe. O campeonato de LoL do Up Academy é a sua chance de brilhar no mapa.</p>
+            <a href="#inscricao" class="btn btn-card">
+              <span>Quero participar</span>
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+            </a>
+          </div>
+          <div class="game-card-glow" aria-hidden="true"></div>
+        </article>
+
+        <!-- Card: Counter-Strike 2 -->
+        <article class="game-card animate-on-scroll" data-game="cs2">
+          <div class="game-card-image">
+            <!-- Imagem temática de Counter-Strike — tiro/militar/tático -->
+            <img src="assets/cs2.jpg" alt="Campeonato de Counter-Strike 2 — FPS competitivo clássico" width="600" height="400" loading="lazy">
+            <div class="game-card-overlay" aria-hidden="true"></div>
+            <span class="game-card-badge">FPS Clássico</span>
+            <div class="game-card-logo" aria-hidden="true">
+              <span class="game-logo-text">COUNTER-STRIKE 2</span>
+            </div>
+          </div>
+          <div class="game-card-content">
+            <h3 class="game-card-title">Counter-Strike 2</h3>
+            <p class="game-card-desc">O clássico dos FPS competitivos está de volta. Faça parte da história do CS2 no maior campeonato cooperativo do Brasil.</p>
+            <a href="#inscricao" class="btn btn-card">
+              <span>Quero participar</span>
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+            </a>
+          </div>
+          <div class="game-card-glow" aria-hidden="true"></div>
+        </article>
+      </div>
+
+      <!-- Aviso de requisito -->
+      <div class="requisito-aviso animate-on-scroll" role="alert">
+        <div class="requisito-icon" aria-hidden="true">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3Z"/><path d="M12 9v4"/><path d="M12 17h.01"/></svg>
+        </div>
+        <div class="requisito-content">
+          <p class="requisito-text">
+            <strong>Atenção:</strong> Para participar dos campeonatos é necessário possuir uma conta ativa e ser associado da cooperativa Sicredi. <a href="#como-participar" class="requisito-link">Veja como se tornar associado →</a>
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================================================================
+       SEÇÃO COMO PARTICIPAR
+       ================================================================ -->
+  <section id="como-participar" class="section section-como-participar" aria-labelledby="como-title">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-tag animate-on-scroll">Como Participar</span>
+        <h2 id="como-title" class="section-title animate-on-scroll">
+          4 passos para o <span class="text-green">seu primeiro campeonato</span>
+        </h2>
+        <p class="section-description animate-on-scroll">
+          O caminho é simples. Siga os passos abaixo e garanta sua vaga.
+        </p>
+      </div>
+
+      <ol class="timeline" aria-label="Passos para participação">
+        <li class="timeline-item animate-on-scroll">
+          <div class="timeline-marker" aria-hidden="true"><span class="timeline-number">01</span></div>
+          <div class="timeline-content">
+            <div class="timeline-icon" aria-hidden="true">
+              <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3 21h18"/><path d="M5 21V7l8-4v18"/><path d="M19 21V11l-6-4"/><path d="M9 9v.01"/><path d="M9 12v.01"/><path d="M9 15v.01"/><path d="M9 18v.01"/></svg>
+            </div>
+            <h3 class="timeline-title">Abra sua conta Sicredi</h3>
+            <p class="timeline-desc">Acesse o site ou aplicativo do Sicredi e abra sua conta digital de forma rápida e 100% online.</p>
+          </div>
+        </li>
+        <li class="timeline-item animate-on-scroll">
+          <div class="timeline-marker" aria-hidden="true"><span class="timeline-number">02</span></div>
+          <div class="timeline-content">
+            <div class="timeline-icon" aria-hidden="true">
+              <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+            </div>
+            <h3 class="timeline-title">Torne-se associado</h3>
+            <p class="timeline-desc">Ao abrir sua conta, você automaticamente se torna associado e passa a ter acesso a todos os benefícios.</p>
+          </div>
+        </li>
+        <li class="timeline-item animate-on-scroll">
+          <div class="timeline-marker" aria-hidden="true"><span class="timeline-number">03</span></div>
+          <div class="timeline-content">
+            <div class="timeline-icon" aria-hidden="true">
+              <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20h9"/><path d="M16.5 3.5a2.12 2.12 0 0 1 3 3L7 19l-4 1 1-4Z"/></svg>
+            </div>
+            <h3 class="timeline-title">Faça sua inscrição</h3>
+            <p class="timeline-desc">Preencha o formulário abaixo com seus dados e escolha o campeonato que deseja participar.</p>
+          </div>
+        </li>
+        <li class="timeline-item animate-on-scroll">
+          <div class="timeline-marker" aria-hidden="true"><span class="timeline-number">04</span></div>
+          <div class="timeline-content">
+            <div class="timeline-icon" aria-hidden="true">
+              <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9H4.5a2.5 2.5 0 0 1 0-5H6"/><path d="M18 9h1.5a2.5 2.5 0 0 0 0-5H18"/><path d="M4 22h16"/><path d="M10 14.66V17c0 .55-.47.98-.97 1.21C7.85 18.75 7 20.24 7 22"/><path d="M14 14.66V17c0 .55.47.98.97 1.21C16.15 18.75 17 20.24 17 22"/><path d="M18 2H6v7a6 6 0 0 0 12 0V2Z"/></svg>
+            </div>
+            <h3 class="timeline-title">Participe do campeonato</h3>
+            <p class="timeline-desc">Receba as informações da competição, prepare seu time e entre no campo de batalha!</p>
+          </div>
+        </li>
+      </ol>
+    </div>
+  </section>
+
+  <!-- ================================================================
+       SEÇÃO BENEFÍCIOS
+       ================================================================ -->
+  <section id="beneficios" class="section section-beneficios" aria-labelledby="beneficios-title">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-tag animate-on-scroll">Benefícios</span>
+        <h2 id="beneficios-title" class="section-title animate-on-scroll">
+          Muito mais que um <span class="text-green">campeonato</span>
+        </h2>
+        <p class="section-description animate-on-scroll">
+          Ser associado Sicredi abre portas para um universo de oportunidades.
+        </p>
+      </div>
+
+      <div class="beneficios-grid">
+        <div class="beneficio-card animate-on-scroll">
+          <div class="beneficio-icon" aria-hidden="true">
+            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="6"/><path d="M15.477 12.89 17 22l-5-3-5 3 1.523-9.11"/></svg>
+          </div>
+          <h3 class="beneficio-title">Premiações</h3>
+          <p class="beneficio-desc">Prêmios em dinheiro e produtos exclusivos para os campeões de cada modalidade.</p>
+        </div>
+        <div class="beneficio-card animate-on-scroll">
+          <div class="beneficio-icon" aria-hidden="true">
+            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><line x1="6" x2="10" y1="12" y2="12"/><line x1="8" x2="8" y1="10" y2="14"/><line x1="15" x2="15.01" y1="13" y2="13"/><line x1="18" x2="18.01" y1="11" y2="11"/><rect width="20" height="12" x="2" y="6" rx="2"/></svg>
+          </div>
+          <h3 class="beneficio-title">Campeonatos Oficiais</h3>
+          <p class="beneficio-desc">Competições organizadas com estrutura profissional, arbitragem e transmissão ao vivo.</p>
+        </div>
+        <div class="beneficio-card animate-on-scroll">
+          <div class="beneficio-icon" aria-hidden="true">
+            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><line x1="12" x2="12" y1="2" y2="22"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
+          </div>
+          <h3 class="beneficio-title">Educação Financeira</h3>
+          <p class="beneficio-desc">Conteúdos e workshops sobre finanças pessoais, investimentos e economia colaborativa.</p>
+        </div>
+        <div class="beneficio-card animate-on-scroll">
+          <div class="beneficio-icon" aria-hidden="true">
+            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+          </div>
+          <h3 class="beneficio-title">Networking</h3>
+          <p class="beneficio-desc">Conecte-se com outros gamers, profissionais de tecnologia e líderes do cooperativismo.</p>
+        </div>
+        <div class="beneficio-card animate-on-scroll">
+          <div class="beneficio-icon" aria-hidden="true">
+            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="m18 16 4-4-4-4"/><path d="m6 8-4 4 4 4"/><path d="m14.5 4-5 16"/></svg>
+          </div>
+          <h3 class="beneficio-title">Desenvolvimento Profissional</h3>
+          <p class="beneficio-desc">Mentorias, palestras e acesso a oportunidades de carreira em tecnologia e esportes.</p>
+        </div>
+        <div class="beneficio-card animate-on-scroll">
+          <div class="beneficio-icon" aria-hidden="true">
+            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 2a14.5 14.5 0 0 0 0 20 14.5 14.5 0 0 0 0-20"/><path d="M2 12h20"/></svg>
+          </div>
+          <h3 class="beneficio-title">Comunidade Gamer</h3>
+          <p class="beneficio-desc">Faça parte de uma comunidade ativa no Discord e Instagram com centenas de membros.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================================================================
+       SEÇÃO FORMULÁRIO DE INSCRIÇÃO
+       ================================================================ -->
+  <section id="inscricao" class="section section-inscricao" aria-labelledby="inscricao-title">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-tag animate-on-scroll">Inscrição</span>
+        <h2 id="inscricao-title" class="section-title animate-on-scroll">
+          Garanta sua <span class="text-green">vaga agora</span>
+        </h2>
+        <p class="section-description animate-on-scroll">
+          Preencha o formulário abaixo e entre na competição. Vagas limitadas!
+        </p>
+      </div>
+
+      <div class="form-wrapper animate-on-scroll">
+        <form id="inscricaoForm" class="inscricao-form" novalidate>
+          <div class="form-grid">
+            <div class="form-group">
+              <label for="nome" class="form-label">Nome completo <span class="required" aria-label="obrigatório">*</span></label>
+              <input type="text" id="nome" name="nome" class="form-input" placeholder="Seu nome completo" required autocomplete="name">
+              <span class="form-error" id="nome-error" role="alert"></span>
+            </div>
+            <div class="form-group">
+              <label for="email" class="form-label">E-mail <span class="required" aria-label="obrigatório">*</span></label>
+              <input type="email" id="email" name="email" class="form-input" placeholder="seu@email.com" required autocomplete="email">
+              <span class="form-error" id="email-error" role="alert"></span>
+            </div>
+            <div class="form-group">
+              <label for="telefone" class="form-label">Telefone <span class="required" aria-label="obrigatório">*</span></label>
+              <input type="tel" id="telefone" name="telefone" class="form-input" placeholder="(00) 00000-0000" required autocomplete="tel">
+              <span class="form-error" id="telefone-error" role="alert"></span>
+            </div>
+            <div class="form-group">
+              <label for="cidade" class="form-label">Cidade <span class="required" aria-label="obrigatório">*</span></label>
+              <input type="text" id="cidade" name="cidade" class="form-input" placeholder="Sua cidade" required autocomplete="address-level2">
+              <span class="form-error" id="cidade-error" role="alert"></span>
+            </div>
+            <div class="form-group">
+              <label for="idade" class="form-label">Idade <span class="required" aria-label="obrigatório">*</span></label>
+              <input type="number" id="idade" name="idade" class="form-input" placeholder="Ex: 20" min="16" max="30" required>
+              <span class="form-error" id="idade-error" role="alert"></span>
+            </div>
+            <div class="form-group">
+              <label for="jogo" class="form-label">Jogo favorito <span class="required" aria-label="obrigatório">*</span></label>
+              <select id="jogo" name="jogo" class="form-input form-select" required>
+                <option value="">Selecione um jogo</option>
+                <option value="valorant">Valorant</option>
+                <option value="lol">League of Legends</option>
+                <option value="cs2">Counter-Strike 2</option>
+              </select>
+              <span class="form-error" id="jogo-error" role="alert"></span>
+            </div>
+            <div class="form-group form-group-full">
+              <label for="equipe" class="form-label">Equipe <span class="optional">(opcional)</span></label>
+              <input type="text" id="equipe" name="equipe" class="form-input" placeholder="Nome da sua equipe">
+            </div>
+            <div class="form-group form-group-full">
+              <label class="form-checkbox-label">
+                <input type="checkbox" id="associado" name="associado" class="form-checkbox" required>
+                <span class="checkbox-custom" aria-hidden="true"></span>
+                <span class="checkbox-text">Sou associado do Sicredi e possuo conta ativa <span class="required" aria-label="obrigatório">*</span></span>
+              </label>
+              <span class="form-error" id="associado-error" role="alert"></span>
+            </div>
+          </div>
+          <button type="submit" class="btn btn-primary btn-submit" id="submitBtn">
+            <span class="btn-submit-text">Quero participar</span>
+            <svg class="btn-submit-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+            <svg class="btn-submit-spinner" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="M21 12a9 9 0 1 1-6.219-8.56"/></svg>
+          </button>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================================================================
+       SEÇÃO FAQ
+       ================================================================ -->
+  <section id="faq" class="section section-faq" aria-labelledby="faq-title">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-tag animate-on-scroll">Dúvidas Frequentes</span>
+        <h2 id="faq-title" class="section-title animate-on-scroll">
+          Perguntas <span class="text-green">frequentes</span>
+        </h2>
+        <p class="section-description animate-on-scroll">Tire suas dúvidas sobre o Sicredi Up Academy.</p>
+      </div>
+
+      <div class="faq-list">
+        <div class="faq-item animate-on-scroll">
+          <button class="faq-question" aria-expanded="false" aria-controls="faq-1">
+            <span>Quem pode participar dos campeonatos?</span>
+            <svg class="faq-arrow" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg>
+          </button>
+          <div class="faq-answer" id="faq-1" role="region">
+            <p>Jovens entre 16 e 30 anos que sejam associados do Sicredi com conta ativa. Não há restrição de gênero ou nível de habilidade — todos são bem-vindos!</p>
+          </div>
+        </div>
+        <div class="faq-item animate-on-scroll">
+          <button class="faq-question" aria-expanded="false" aria-controls="faq-2">
+            <span>Preciso ser associado do Sicredi para participar?</span>
+            <svg class="faq-arrow" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg>
+          </button>
+          <div class="faq-answer" id="faq-2" role="region">
+            <p>Sim! Ser associado com conta ativa é um requisito obrigatório. Mas abrir sua conta é rápido, gratuito e pode ser feito 100% online pelo site ou aplicativo do Sicred.</p>
+          </div>
+        </div>
+        <div class="faq-item animate-on-scroll">
+          <button class="faq-question" aria-expanded="false" aria-controls="faq-3">
+            <span>Há taxa de inscrição?</span>
+            <svg class="faq-arrow" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg>
+          </button>
+          <div class="faq-answer" id="faq-3" role="region">
+            <p>Não! A inscrição no Sicredi Up Academy é completamente gratuita para todos os associados.</p>
+          </div>
+        </div>
+        <div class="faq-item animate-on-scroll">
+          <button class="faq-question" aria-expanded="false" aria-controls="faq-4">
+            <span>Posso participar em mais de um jogo?</span>
+            <svg class="faq-arrow" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg>
+          </button>
+          <div class="faq-answer" id="faq-4" role="region">
+            <p>Sim! Você pode se inscrever em quantos campeonatos desejar, desde que consiga cumprir os horários de cada competição sem conflitos.</p>
+          </div>
+        </div>
+        <div class="faq-item animate-on-scroll">
+          <button class="faq-question" aria-expanded="false" aria-controls="faq-5">
+            <span>Preciso ter uma equipe para participar?</span>
+            <svg class="faq-arrow" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg>
+          </button>
+          <div class="faq-answer" id="faq-5" role="region">
+            <p>Recomendamos que você tenha uma equipe completa, mas também oferecemos canais no Discord oficial para encontrar companheiros de time.</p>
+          </div>
+        </div>
+        <div class="faq-item animate-on-scroll">
+          <button class="faq-question" aria-expanded="false" aria-controls="faq-6">
+            <span>Quais são as premiações?</span>
+            <svg class="faq-arrow" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg>
+          </button>
+          <div class="faq-answer" id="faq-6" role="region">
+            <p>Os campeonatos possuem premiações em dinheiro, produtos gamer e benefícios exclusivos do Sicredi. O valor total do prize pool será divulgado antes das competições.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================================================================
+       FOOTER — Usa a logo do projeto
+       ================================================================ -->
+  <footer class="footer" role="contentinfo">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <!-- Logo do projeto no footer -->
+          <a href="#hero" class="footer-logo-link" aria-label="Sicredi Up Academy - Voltar ao topo">
+            <img src="assets/logo1.png" alt="Up Academy Logo" class="footer-logo-img" width="180" height="60" loading="lazy">
+          </a>
+          <p class="footer-desc">Conectando o universo gamer com educação financeira e cooperativismo. Uma iniciativa Sicredi para transformar o futuro dos jovens.</p>
+          <div class="footer-social">
+            <a href="#" class="social-link" aria-label="Siga no Instagram">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="20" x="2" y="2" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" x2="17.51" y1="6.5" y2="6.5"/></svg>
+            </a>
+            <a href="#" class="social-link" aria-label="Entre no Discord">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M20.317 4.37a19.791 19.791 0 0 0-4.885-1.515.074.074 0 0 0-.079.037c-.21.375-.444.864-.608 1.25a18.27 18.27 0 0 0-5.487 0 12.64 12.64 0 0 0-.617-1.25.077.077 0 0 0-.079-.037A19.736 19.736 0 0 0 3.677 4.37a.07.07 0 0 0-.032.027C.533 9.046-.32 13.58.099 18.057a.082.082 0 0 0 .031.057 19.9 19.9 0 0 0 5.993 3.03.078.078 0 0 0 .084-.028c.462-.63.874-1.295 1.226-1.994a.076.076 0 0 0-.041-.106 13.107 13.107 0 0 1-1.872-.892.077.077 0 0 1-.008-.128 10.2 10.2 0 0 0 .372-.292.074.074 0 0 1 .077-.01c3.928 1.793 8.18 1.793 12.062 0a.074.074 0 0 1 .078.01c.12.098.246.198.373.292a.077.077 0 0 1-.006.127 12.299 12.299 0 0 1-1.873.892.077.077 0 0 0-.041.107c.36.698.772 1.362 1.225 1.993a.076.076 0 0 0 .084.028 19.839 19.839 0 0 0 6.002-3.03.077.077 0 0 0 .032-.054c.5-5.177-.838-9.674-3.549-13.66a.061.061 0 0 0-.031-.03zM8.02 15.33c-1.183 0-2.157-1.085-2.157-2.419 0-1.333.956-2.419 2.157-2.419 1.21 0 2.176 1.095 2.157 2.42 0 1.333-.956 2.418-2.157 2.418zm7.975 0c-1.183 0-2.157-1.085-2.157-2.419 0-1.333.955-2.419 2.157-2.419 1.21 0 2.176 1.095 2.157 2.42 0 1.333-.946 2.418-2.157 2.418z"/></svg>
+            </a>
+          </div>
+        </div>
+        <div class="footer-links-group">
+          <h4 class="footer-links-title">Links</h4>
+          <ul class="footer-links">
+            <li><a href="#sobre">Sobre</a></li>
+            <li><a href="#campeonatos">Campeonatos</a></li>
+            <li><a href="#beneficios">Benefícios</a></li>
+            <li><a href="#faq">FAQ</a></li>
+          </ul>
+        </div>
+        <div class="footer-links-group">
+          <h4 class="footer-links-title">Legal</h4>
+          <ul class="footer-links">
+            <li><a href="#">Regulamento</a></li>
+            <li><a href="#">Política de Privacidade</a></li>
+            <li><a href="#">Termos de Uso</a></li>
+          </ul>
+        </div>
+        <div class="footer-links-group">
+          <h4 class="footer-links-title">Contato</h4>
+          <ul class="footer-links">
+            <li><a href="mailto:upacademy@sicredi.com.br">upacademy@sicredi.com.br</a></li>
+            <li><a href="#">Discord Oficial</a></li>
+            <li><a href="#">Instagram</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>&copy; 2025 Sicredi Up Academy. Todos os direitos reservados. Uma iniciativa do Sistema Sicredi.</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Botão Voltar ao Topo -->
+  <button id="backToTop" class="back-to-top" aria-label="Voltar ao topo da página">
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m18 15-6-6-6 6"/></svg>
+  </button>
+
+  <!-- Modal de Sucesso -->
+  <div id="successModal" class="modal-overlay" role="dialog" aria-modal="true" aria-labelledby="modalTitle" aria-hidden="true">
+    <div class="modal-content">
+      <div class="modal-checkmark" aria-hidden="true">
+        <svg width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+      </div>
+      <h3 id="modalTitle" class="modal-title">Inscrição realizada com sucesso!</h3>
+      <p class="modal-text">Sua inscrição foi enviada com sucesso. Em breve você receberá mais informações no seu e-mail. Prepare-se para o campeonato!</p>
+      <button id="modalClose" class="btn btn-primary btn-modal-close">Entendi, vou me preparar!</button>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
