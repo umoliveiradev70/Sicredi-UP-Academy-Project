@@ -1,14 +1,25 @@
 /**
  * ============================================================
- * SUPABASE — Camada de integração com o banco de dados
+ * SUPABASE — Integração completa com o banco de dados
  *
- * INSTRUÇÕES:
- * 1. Crie um projeto em https://supabase.com
- * 2. Substitua os valores abaixo pelas suas credenciais
- * 3. Habilite Authentication > Providers desejados (Email, Google)
- * 4. Configure as tabelas de perfil no SQL Editor se necessário
+ * CONFIGURAÇÃO NECESSÁRIA:
+ * 1. Acesse https://supabase.com → Seu Projeto → Settings → API
+ * 2. Copie a URL do projeto e a chave anon (anon public key)
+ * 3. Cole nos campos abaixo
  *
- * Dependência: SDK do Supabase (carregada via CDN no HTML)
+ * DEPENDÊNCIA:
+ *  - SDK do Supabase (carregada via CDN no HTML antes deste arquivo)
+ *    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+ *
+ * SEGURANÇA:
+ *  - As credenciais ficam expostas no frontend (anon key é pública por design)
+ *  - A RLS protege os dados no banco (cada usuário só vê o que é seu)
+ *  - Em produção, considere usar um backend (Edge Functions) para operações sensíveis
+ *
+ * ARQUITETURA:
+ *  - Este arquivo: configuração + funções de dados
+ *  - auth.js: fluxos de autenticação, UI, proteção de rotas
+ *  - Separação clara: dados aqui, interação lá
  * ============================================================
  */
 
@@ -21,300 +32,132 @@ const SUPABASE_CONFIG = {
   ANON_KEY: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InBkbXpmYnVsb3RsdXFvdmJpdmJuIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODM0MjMxMDAsImV4cCI6MjA5ODk5OTEwMH0.AT6SS6Bp07xgpF80j-KZIXcK4vNbTT_o5qjGwaVLRSI',
 };
 
+
 /**
- * Inicializa o cliente Supabase.
- * O objeto `window.supabase` é criado pelo SDK carregado via CDN.
- * Aqui apenas criamos uma instância configurada.
+ * Cliente Supabase inicializado.
+ * Verifica se a SDK foi carregada antes de criar a instância.
+ * Retorna null em caso de falha (auth.js trata o fallback).
  */
-const supabaseClient = (() => {
+const supabase = (() => {
   try {
     if (typeof window.supabase === 'undefined' || !window.supabase.createClient) {
-      console.warn('[Supabase] SDK não encontrada. Usando modo simulado.');
+      console.warn(
+        '[Supabase] SDK não encontrada. Verifique se o script do CDN está carregado antes deste arquivo.'
+      );
       return null;
     }
-    return window.supabase.createClient(SUPABASE_CONFIG.URL, SUPABASE_CONFIG.ANON_KEY);
+
+    if (!SUPABASE_CONFIG.URL || !SUPABASE_CONFIG.ANON_KEY) {
+      console.warn(
+        '[Supabase] Credenciais não configuradas. Edite as variáveis URL e ANON_KEY no topo deste arquivo.'
+      );
+      return null;
+    }
+
+    return window.supabase.createClient(SUPABASE_CONFIG.URL, SUPABASE_CONFIG.ANON_KEY, {
+      auth: {
+        autoRefreshToken: true,
+        persistSession: true,
+        detectSessionInUrl: true,
+      },
+    });
   } catch (err) {
-    console.error('[Supabase] Erro ao inicializar:', err);
+    console.error('[Supabase] Erro fatal ao inicializar:', err);
     return null;
   }
 })();
 
+
 /**
  * ============================================================
- * FUNÇÕES DE AUTENTICAÇÃO — Supabase Auth
- * Cada função retorna uma Promise. Substituir os blocos
- * "MODO SIMULADO" pelas chamadas reais do Supabase.
+ * Função auxiliar — Executa query Supabase com tratamento de erro
+ * Padroniza o formato de erro para o front-end
+ * ============================================================
+ * @private
+ */
+async function _query(fn) {
+  try {
+    const result = await fn();
+    return { data: result.data, error: null };
+  } catch (err) {
+    // Erro vindo do cliente Supabase (rede, permissão, etc.)
+    if (err?.message || err?.error) {
+      const msg = err.message || err.error?.message || 'Erro desconhecido na requisição.';
+      return { data: null, error: { message: msg } };
+    }
+    return { data: null, error: { message: 'Erro inesperado.' }, details: err };
+  }
+}
+
+
+/**
+ * ============================================================
+ * AUTENTICAÇÃO
  * ============================================================
  */
-
 const SupabaseAuth = {
 
   /**
-   * Cadastro de novo usuário com email e senha.
-   * Após cadastro, o Supabase envia email de confirmação.
+   * Cadastro de novo usuário.
    *
-   * @param {Object} data - { email, password, options: { data: { nome, cpf, telefone, cidade, estado, nascimento } } }
-   * @returns {Promise<{ user, error }>}
+   * Fluxo:
+   *  1. Cria conta no Supabase Auth (envia email de confirmação)
+   *  2. O trigger handle_new_user cria o perfil automaticamente
+   *  3. Registro de atividade de cadastro (via trigger)
+   *  4. Retorna o usuário (email ainda não confirmado)
+   *
+   * NOTA: Se email confirmation estiver habilitado no dashboard,
+   * o usuário precisa confirmar o email antes de fazer login.
+   *
+   * @param {Object} data
+   * @param {string} data.email
+   * @param {string} data.password
+   * @param {string} data.nome - Nome completo
+   * @param {string} [data.cpf]
+   * @param {string} [data.telefone]
+   * @param {string} [data.cidade]
+   * @param {string} [data.estado]
+   * @param {string} [data.nascimento] - formato YYYY-MM-DD
+   * @returns {Promise<{user: Object|null, error: Object|null, needsConfirmation: boolean}>}
    */
   async register(data) {
-    // ========================================================
-    // MODO REAL — Descomentar quando Supabase estiver configurado:
-    // ========================================================
-    /*
-    const { data: { user, error }, ...rest } = await supabaseClient.auth.signUp({
-      email: data.email,
-      password: data.password,
-      options: {
-        data: {
-          nome_completo: data.nome,
-          cpf: data.cpf,
-          telefone: data.telefone,
-          cidade: data.cidade,
-          estado: data.estado,
-          data_nascimento: data.nascimento,
+    if (!supabase) return this._fallback('register');
+
+    const { data: { user, error } = {} } = await _query(() =>
+      supabase.auth.signUp({
+        email: data.email,
+        password: data.password,
+        options: {
+          data: {
+            nome_completo: data.nome,
+            cpf: data.cpf || null,
+            telefone: data.telefone || null,
+            cidade: data.cidade || null,
+            estado: data.estado || null,
+            nascimento: data.nascimento || null,
+          },
+          emailRedirectTo: `${window.location.origin}/login.html?confirmed=true`,
         },
-        emailRedirectTo: `${window.location.origin}/dashboard.html`,
-      },
-    });
-    return { user, error };
-    */
+      })
+    );
 
-    // ========================================================
-    // MODO SIMULADO — Remover quando integrar com Supabase
-    // ========================================================
-    console.log('[Supabase] register() — modo simulado', data);
-    await this._delay(1500);
-    return { user: { id: 'sim-' + Date.now(), email: data.email }, error: null };
-  },
+    // Verificar se o email precisa de confirmação
+    const needsConfirmation = !error && user && !user.confirmed_at && user.email && !user.email_confirmed_at;
 
-  /**
-   * Login com email e senha.
-   * Retorna sessão com access_token e refresh_token.
-   *
-   * @param {string} email
-   * @param {string} password
-   * @returns {Promise<{ user, session, error }>}
-   */
-  async login(email, password) {
-    // ========================================================
-    // MODO REAL:
-    // ========================================================
-    /*
-    const { data: { user, session }, error } = await supabaseClient.auth.signInWithPassword({
-      email,
-      password,
-    });
-    return { user, session, error };
-    */
-
-    // ========================================================
-    // MODO SIMULADO:
-    // ========================================================
-    console.log('[Supabase] login() — modo simulado', { email });
-    await this._delay(1200);
-
-    if (email === 'erro@teste.com') {
-      return { user: null, session: null, error: { message: 'Credenciais inválidas' } };
-    }
-
-    // Simular sessão armazenada no localStorage
-    const mockUser = {
-      id: 'usr_sim_' + Date.now(),
-      email: email,
-      user_metadata: {
-        nome_completo: 'João Silva',
-        avatar_url: null,
-      },
+    return {
+      user: user || null,
+      error,
+      needsConfirmation,
     };
-    const mockSession = {
-      access_token: 'mock_access_' + Date.now(),
-      refresh_token: 'mock_refresh_' + Date.now(),
-      expires_at: Math.floor(Date.now() / 1000) + 3600,
-      user: mockUser,
+  },
+
+  _fallback(action) {
+    console.warn(`[Supabase] Falha ao executar "${action}". Verifique a configuração do Supabase.`);
+    return {
+      user: null,
+      error: { message: 'Supabase não está configurado corretamente.' },
+      needsConfirmation: false,
     };
-
-    localStorage.setItem('up_academy_session', JSON.stringify(mockSession));
-    return { user: mockUser, session: mockSession, error: null };
   },
 
-  /**
-   * Login com Google (OAuth).
-   *
-   * @returns {Promise<{ user, session, error }>}
-   */
-  async loginWithGoogle() {
-    // ========================================================
-    // MODO REAL:
-    // ========================================================
-    /*
-    const { data: { user, session }, error } = await supabaseClient.auth.signInWithOAuth({
-      provider: 'google',
-      options: {
-        redirectTo: `${window.location.origin}/dashboard.html`,
-      },
-    });
-    return { user, session, error };
-    */
-
-    // ========================================================
-    // MODO SIMULADO:
-    // ========================================================
-    console.log('[Supabase] loginWithGoogle() — modo simulado');
-    await this._delay(1200);
-
-    const mockUser = {
-      id: 'usr_google_' + Date.now(),
-      email: 'joao@gmail.com',
-      user_metadata: { nome_completo: 'João Silva', avatar_url: null },
-    };
-    const mockSession = {
-      access_token: 'mock_google_' + Date.now(),
-      refresh_token: 'mock_google_r_' + Date.now(),
-      expires_at: Math.floor(Date.now() / 1000) + 3600,
-      user: mockUser,
-    };
-
-    localStorage.setItem('up_academy_session', JSON.stringify(mockSession));
-    return { user: mockUser, session: mockSession, error: null };
-  },
-
-  /**
-   * Logout — Encerra a sessão no cliente e no Supabase.
-   *
-   * @returns {Promise<{ error }>}
-   */
-  async logout() {
-    // ========================================================
-    // MODO REAL:
-    // ========================================================
-    /*
-    const { error } = await supabaseClient.auth.signOut();
-    localStorage.removeItem('up_academy_session');
-    return { error };
-    */
-
-    // ========================================================
-    // MODO SIMULADO:
-    // ========================================================
-    console.log('[Supabase] logout() — modo simulado');
-    localStorage.removeItem('up_academy_session');
-    await this._delay(300);
-    return { error: null };
-  },
-
-  /**
-   * Recuperação de senha — Envia link de reset por email.
-   *
-   * @param {string} email
-   * @returns {Promise<{ error }>}
-   */
-  async forgotPassword(email) {
-    // ========================================================
-    // MODO REAL:
-    // ========================================================
-    /*
-    const { error } = await supabaseClient.auth.resetPasswordForEmail(email, {
-      redirectTo: `${window.location.origin}/login.html`,
-    });
-    return { error };
-    */
-
-    // ========================================================
-    // MODO SIMULADO:
-    // ========================================================
-    console.log('[Supabase] forgotPassword() — modo simulado', { email });
-    await this._delay(1500);
-    return { error: null };
-  },
-
-  /**
-   * Verifica se há sessão ativa e é válida.
-   * Tenta refresh se o token estiver próximo de expirar.
-   *
-   * @returns {Promise<{ session: Object|null, user: Object|null }>}
-   */
-  async checkSession() {
-    // ========================================================
-    // MODO REAL:
-    // ========================================================
-    /*
-    const { data: { session }, error } = await supabaseClient.auth.getSession();
-    if (error || !session) return { session: null, user: null };
-
-    // Verificar se está próximo de expirar (5 min de margem)
-    const expiresAt = session.expires_at * 1000;
-    const now = Date.now();
-    if (expiresAt - now < 300000) {
-      const { data: { session: newSession }, error: refreshError } = await supabaseClient.auth.refreshSession();
-      if (refreshError) {
-        localStorage.removeItem('up_academy_session');
-        return { session: null, user: null };
-      }
-      return { session: newSession, user: newSession.user };
-    }
-
-    return { session, user: session.user };
-    */
-
-    // ========================================================
-    // MODO SIMULADO:
-    // ========================================================
-    const stored = localStorage.getItem('up_academy_session');
-    if (!stored) return { session: null, user: null };
-
-    try {
-      const session = JSON.parse(stored);
-      if (session.expires_at && session.expires_at < Math.floor(Date.now() / 1000)) {
-        localStorage.removeItem('up_academy_session');
-        return { session: null, user: null };
-      }
-      return { session, user: session.user };
-    } catch {
-      localStorage.removeItem('up_academy_session');
-      return { session: null, user: null };
-    }
-  },
-
-  /**
-   * Atualiza os metadados do perfil do usuário.
-   *
-   * @param {Object} attributes - { nome_completo, telefone, cidade, estado, avatar_url }
-   * @returns {Promise<{ user, error }>}
-   */
-  async updateProfile(attributes) {
-    // ========================================================
-    // MODO REAL:
-    // ========================================================
-    /*
-    const { data: { user }, error } = await supabaseClient.auth.updateUser({
-      data: attributes,
-    });
-    return { user, error };
-    */
-
-    // ========================================================
-    // MODO SIMULADO:
-    // ========================================================
-    console.log('[Supabase] updateProfile() — modo simulado', attributes);
-    await this._delay(800);
-
-    const stored = localStorage.getItem('up_academy_session');
-    if (stored) {
-      const session = JSON.parse(stored);
-      if (session.user && session.user.user_metadata) {
-        Object.assign(session.user.user_metadata, attributes);
-        localStorage.setItem('up_academy_session', JSON.stringify(session));
-        return { user: session.user, error: null };
-      }
-    }
-    return { user: null, error: { message: 'Sessão não encontrada' } };
-  },
-
-  /**
-   * Utilitário interno — Simula delay assíncrono.
-   * @private
-   */
-  _delay(ms) {
-    return new Promise(resolve => setTimeout(resolve, ms));
-  },
 };
