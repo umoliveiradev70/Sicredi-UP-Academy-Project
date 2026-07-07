@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Criar Conta — Sicredi Up Academy</title>
+  <meta name="description" content="Crie sua conta gratuita na plataforma Sicredi Up Academy.">
+  <link rel="icon" type="image/png" href="logo1.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <canvas id="globalParticles" class="global-particles" aria-hidden="true"></canvas>
+
+  <nav id="navbar" class="navbar scrolled" role="navigation" aria-label="Navegação principal">
+    <div class="nav-container">
+      <a href="index.html" class="nav-logo" aria-label="Home"><img src="logo1.png" alt="Logo" class="nav-logo-img" width="140" height="48"></a>
+      <ul class="nav-links" id="navLinks" role="menubar">
+        <li role="none"><a href="index.html" class="nav-link" role="menuitem">Home</a></li>
+        <li role="none"><a href="index.html#campeonatos" class="nav-link" role="menuitem">Campeonatos</a></li>
+        <li role="none"><a href="up-rewards.html" class="nav-link nav-link--rewards" role="menuitem">UP Rewards</a></li>
+        <li role="none"><a href="index.html#faq" class="nav-link" role="menuitem">FAQ</a></li>
+      </ul>
+      <div id="nav-auth" class="nav-auth"></div>
+      <button class="nav-hamburger" id="hamburger" aria-label="Abrir menu" aria-expanded="false"><span></span><span></span><span></span></button>
+    </div>
+  </nav>
+
+  <section class="auth-page">
+    <div class="auth-glow-1" aria-hidden="true"></div>
+    <div class="auth-glow-2" aria-hidden="true"></div>
+
+    <div class="auth-container">
+      <div class="auth-card animate-on-scroll">
+        <div class="auth-header">
+          <a href="index.html" class="auth-logo" aria-label="Home"><img src="logo1.png" alt="Up Academy" width="120" height="40"></a>
+          <h1 class="auth-title">Crie sua conta</h1>
+          <p class="auth-subtitle">Junte-se à maior comunidade gamer do cooperativismo</p>
+        </div>
+
+        <form id="cadastroForm" class="auth-form" novalidate>
+          <div class="auth-row">
+            <div class="auth-group">
+              <label for="cad-nome" class="form-label">Nome completo *</label>
+              <input type="text" id="cad-nome" class="form-input" placeholder="Seu nome" required autocomplete="name">
+              <span class="form-error" id="cad-nome-error" role="alert"></span>
+            </div>
+            <div class="auth-group">
+              <label for="cad-cpf" class="form-label">CPF *</label>
+              <input type="text" id="cad-cpf" class="form-input" placeholder="000.000.000-00" required autocomplete="off">
+              <span class="form-error" id="cad-cpf-error" role="alert"></span>
+            </div>
+          </div>
+
+          <div class="auth-row">
+            <div class="auth-group">
+              <label for="cad-nascimento" class="form-label">Data de nascimento *</label>
+              <input type="date" id="cad-nascimento" class="form-input" required>
+              <span class="form-error" id="cad-nascimento-error" role="alert"></span>
+            </div>
+            <div class="auth-group">
+              <label for="cad-telefone" class="form-label">Telefone *</label>
+              <input type="tel" id="cad-telefone" class="form-input" placeholder="(00) 00000-0000" required autocomplete="tel">
+              <span class="form-error" id="cad-telefone-error" role="alert"></span>
+            </div>
+          </div>
+
+          <div class="auth-row">
+            <div class="auth-group">
+              <label for="cad-cidade" class="form-label">Cidade *</label>
+              <input type="text" id="cad-cidade" class="form-input" placeholder="Sua cidade" required>
+              <span class="form-error" id="cad-cidade-error" role="alert"></span>
+            </div>
+            <div class="auth-group">
+              <label for="cad-estado" class="form-label">Estado *</label>
+              <select id="cad-estado" class="form-input form-select" required>
+                <option value="">Selecione</option>
+                <option value="AC">Acre</option><option value="AL">Alagoas</option><option value="AP">Amapá</option><option value="AM">Amazonas</option><option value="BA">Bahia</option><option value="CE">Ceará</option><option value="DF">Distrito Federal</option><option value="ES">Espírito Santo</option><option value="GO">Goiás</option><option value="MA">Maranhão</option><option value="MT">Mato Grosso</option><option value="MS">Mato Grosso do Sul</option><option value="MG">Minas Gerais</option><option value="PA">Pará</option><option value="PB">Paraíba</option><option value="PR">Paraná</option><option value="PE">Pernambuco</option><option value="PI">Piauí</option><option value="RJ">Rio de Janeiro</option><option value="RN">Rio Grande do Norte</option><option value="RS">Rio Grande do Sul</option><option value="RO">Rondônia</option><option value="RR">Roraima</option><option value="SC">Santa Catarina</option><option value="SP">São Paulo</option><option value="SE">Sergipe</option><option value="TO">Tocantins</option>
+              </select>
+              <span class="form-error" id="cad-estado-error" role="alert"></span>
+            </div>
+          </div>
+
+          <div class="auth-group">
+            <label for="cad-email" class="form-label">E-mail *</label>
+            <input type="email" id="cad-email" class="form-input" placeholder="seu@email.com" required autocomplete="email">
+            <span class="form-error" id="cad-email-error" role="alert"></span>
+          </div>
+
+          <div class="auth-group">
+            <label for="cad-senha" class="form-label">Senha *</label>
+            <div class="auth-password-wrap">
+              <input type="password" id="cad-senha" class="form-input" placeholder="Mínimo 8 caracteres" required autocomplete="new-password">
+              <button type="button" class="auth-toggle-pass" aria-label="Mostrar senha" data-target="cad-senha">
+                <svg class="eye-open" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M2 12s3-7 10-7 10 7 10 7-3 7-10 7-10-7-10-7Z"/><circle cx="12" cy="12" r="3"/></svg>
+                <svg class="eye-closed" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" style="display:none"><path d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94"/><path d="M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19m-6.72-1.07a3 3 0 1 1-4.24-4.24"/><line x1="1" x2="23" y1="1" y2="23"/></svg>
+              </button>
+            </div>
+            <!-- Indicador de força da senha -->
+            <div class="auth-strength" id="password-strength">
+              <div class="auth-strength-bar"><div class="auth-strength-fill" id="strength-fill"></div></div>
+              <span class="auth-strength-label" id="strength-label"></span>
+            </div>
+            <span class="form-error" id="cad-senha-error" role="alert"></span>
+          </div>
+
+          <div class="auth-group">
+            <label for="cad-confirmar" class="form-label">Confirmar senha *</label>
+            <div class="auth-password-wrap">
+              <input type="password" id="cad-confirmar" class="form-input" placeholder="Repita a senha" required autocomplete="new-password">
+              <button type="button" class="auth-toggle-pass" aria-label="Mostrar senha" data-target="cad-confirmar">
+                <svg class="eye-open" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M2 12s3-7 10-7 10 7 10 7-3 7-10 7-10-7-10-7Z"/><circle cx="12" cy="12" r="3"/></svg>
+                <svg class="eye-closed" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" style="display:none"><path d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94"/><path d="M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19m-6.72-1.07a3 3 0 1 1-4.24-4.24"/><line x1="1" x2="23" y1="1" y2="23"/></svg>
+              </button>
+            </div>
+            <span class="form-error" id="cad-confirmar-error" role="alert"></span>
+          </div>
+
+          <div class="auth-checks">
+            <label class="auth-checkbox-label">
+              <input type="checkbox" id="cad-termos" class="form-checkbox" required>
+              <span class="checkbox-custom" aria-hidden="true"></span>
+              <span class="checkbox-text">Aceito os <a href="#" class="auth-inline-link">Termos de Uso</a> *</span>
+            </label>
+            <label class="auth-checkbox-label">
+              <input type="checkbox" id="cad-privacidade" class="form-checkbox" required>
+              <span class="checkbox-custom" aria-hidden="true"></span>
+              <span class="checkbox-text">Aceito a <a href="#" class="auth-inline-link">Política de Privacidade</a> *</span>
+            </label>
+            <span class="form-error" id="cad-termos-error" role="alert"></span>
+          </div>
+
+          <button type="submit" class="btn btn-primary btn-submit" id="cadBtn">
+            <span class="btn-submit-text">Criar Conta</span>
+            <svg class="btn-submit-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><line x1="19" x2="19" y1="8" y2="14"/><line x1="22" x2="16" y1="11" y2="11"/></svg>
+            <svg class="btn-submit-spinner" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="M21 12a9 9 0 1 1-6.219-8.56"/></svg>
+          </button>
+        </form>
+
+        <div class="auth-footer-links">
+          <span>Já tem conta?</span>
+          <a href="login.html" class="auth-link">Entrar</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer class="footer" role="contentinfo">
+    <div class="container"><div class="footer-bottom"><p>&copy; 2025 Sicredi Up Academy. Todos os direitos reservados.</p></div></div>
+  </footer>
+
+  <div id="toast-container" class="toast-container" aria-live="polite"></div>
+
+  <script src="script.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="supabase.js"></script>
+  <script src="auth.js"></script>
+</body>
+</html>

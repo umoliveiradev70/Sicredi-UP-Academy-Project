@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Recuperar Senha — Sicredi Up Academy</title>
+  <link rel="icon" type="image/png" href="logo1.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <canvas id="globalParticles" class="global-particles" aria-hidden="true"></canvas>
+
+  <nav id="navbar" class="navbar scrolled" role="navigation" aria-label="Navegação principal">
+    <div class="nav-container">
+      <a href="index.html" class="nav-logo" aria-label="Home"><img src="logo1.png" alt="Logo" class="nav-logo-img" width="140" height="48"></a>
+      <ul class="nav-links" id="navLinks" role="menubar">
+        <li role="none"><a href="index.html" class="nav-link" role="menuitem">Home</a></li>
+        <li role="none"><a href="index.html#campeonatos" class="nav-link" role="menuitem">Campeonatos</a></li>
+        <li role="none"><a href="up-rewards.html" class="nav-link nav-link--rewards" role="menuitem">UP Rewards</a></li>
+        <li role="none"><a href="index.html#faq" class="nav-link" role="menuitem">FAQ</a></li>
+      </ul>
+      <div id="nav-auth" class="nav-auth"></div>
+      <button class="nav-hamburger" id="hamburger" aria-label="Abrir menu" aria-expanded="false"><span></span><span></span><span></span></button>
+    </div>
+  </nav>
+
+  <section class="auth-page">
+    <div class="auth-glow-1" aria-hidden="true"></div>
+    <div class="auth-glow-2" aria-hidden="true"></div>
+    <div class="auth-container">
+      <div class="auth-card auth-card--narrow animate-on-scroll">
+        <div class="auth-header">
+          <a href="index.html" class="auth-logo" aria-label="Home"><img src="logo1.png" alt="Up Academy" width="120" height="40"></a>
+          <h1 class="auth-title">Recuperar senha</h1>
+          <p class="auth-subtitle">Informe seu e-mail e enviaremos um link de recuperação.</p>
+        </div>
+
+        <form id="recoverForm" class="auth-form" novalidate>
+          <div class="auth-group">
+            <label for="recover-email" class="form-label">E-mail</label>
+            <input type="email" id="recover-email" class="form-input" placeholder="seu@email.com" required autocomplete="email">
+            <span class="form-error" id="recover-email-error" role="alert"></span>
+          </div>
+          <button type="submit" class="btn btn-primary btn-submit" id="recoverBtn">
+            <span class="btn-submit-text">Enviar recuperação</span>
+            <svg class="btn-submit-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m22 2-7 20-4-8.5L2 22l4.5-8.5Z"/><path d="m15 5 3 3"/></svg>
+            <svg class="btn-submit-spinner" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="M21 12a9 9 0 1 1-6.219-8.56"/></svg>
+          </button>
+        </form>
+
+        <!-- Mensagem de sucesso (oculta por padrão) -->
+        <div id="recover-success" class="auth-success" style="display:none">
+          <div class="auth-success-icon">
+            <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+          </div>
+          <h3>E-mail enviado!</h3>
+          <p>Verifique sua caixa de entrada e siga as instruções para redefinir sua senha.</p>
+        </div>
+
+        <div class="auth-footer-links">
+          <a href="login.html" class="auth-link">Voltar ao login</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer class="footer" role="contentinfo">
+    <div class="container"><div class="footer-bottom"><p>&copy; 2025 Sicredi Up Academy. Todos os direitos reservados.</p></div></div>
+  </footer>
+
+  <div id="toast-container" class="toast-container" aria-live="polite"></div>
+
+  <script src="script.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="supabase.js"></script>
+  <script src="auth.js"></script>
+</body>
+</html>
